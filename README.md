@@ -1,7 +1,6 @@
-# Mijn Project 
-test van freek
+# Smart Grid 
 
-Hier staat een korte beschrijving van het probleem evt. met plaatje.
+Dit programma optimaliseert de infrastructruur in een woonwijk om overtollige groene energie van huizen tijdelijk op te slaan.
 
 ## Aan de slag (Getting Started)
 
@@ -27,7 +26,9 @@ python main.py
 
 ## Auteurs (Authors)
 
-* Ik
+* Ingmar de Mare
+* Koen Smallegange
+* Freek Temming
 
 ## Dankwoord (Acknowledgments)
 
