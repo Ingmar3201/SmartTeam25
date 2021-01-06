@@ -1,5 +1,5 @@
 import csv
-from classBattery import CBattery
+from classBattery import Battery
 from classHouse import House
 
 """
@@ -28,8 +28,8 @@ with open("../data/district_1/district-1_batteries.csv", 'r') as file:
     reader = csv.reader(file)
     next(reader, None)
     for row in reader:
-        battery = CBattery(row[0], row[1])
-        battery.coordinates()
+        battery = Battery(row[0], row[1])
+        battery.extract_coordinates()
         batteries.append(battery)
 
 """

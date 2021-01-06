@@ -1,4 +1,4 @@
-class CCable():
+class Cable():
     def __init__(house, battery):
         self.house = house
         self.battery = battery
@@ -13,4 +13,4 @@ class CCable():
     def calc_length(self):
         self.length = abs(self.house.x − self.battery.x) + abs(self.house.y − self.battery.y)
         return self.length
-        
+
