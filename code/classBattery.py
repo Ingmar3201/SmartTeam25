@@ -1,7 +1,8 @@
 class CBattery():
     def __init__(self, position, capacity):
         self._position = position
-        self.capacity = capacity
+        self.capacity = float(capacity)
+        self.price = 5000
 
     def coordinates(self):
         self.x = 0
