@@ -37,8 +37,9 @@ def plot(path_houses, path_batteries):
     
     # plots single grid with seperate x and y cordslist for houses and batteries
     icon_size = 9
+    fig_size = 6
 
-    fig, ax = plt.subplots(1, figsize=(10, 10))
+    fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
     fig.suptitle('District 1')
 
     ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = icon_size)
