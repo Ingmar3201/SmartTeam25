@@ -1,15 +1,14 @@
-import csv
 import os, sys
-
+import csv
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
 sys.path.append(os.path.join(directory, "code", "classes"))
-sys.path.append(os.path.join(directory, "code", "algoritmes"))
+sys.path.append(os.path.join(directory, "code", "algorithms"))
 
 from classBattery import Battery
 from classHouse import House
-
+from readBattery import readBattery
 
 """
 house objects by Freek
@@ -28,21 +27,4 @@ for i in houses:
     i.test()
 """
 
-"""
-battery objects by Ingmar
-"""
-batteries = []
-
-with open("data/district_1/district-1_batteries.csv", 'r') as file:
-    reader = csv.reader(file)
-    next(reader, None)
-    for row in reader:
-        battery = Battery(row[0], row[1])
-        battery.extract_coordinates()
-        batteries.append(battery)
-
-"""
-for bat in batteries:
-    print(bat.x, bat.y)
-    print(bat.capacity)
-    """
+readBattery("data/district_1/district-1_batteries.csv")
