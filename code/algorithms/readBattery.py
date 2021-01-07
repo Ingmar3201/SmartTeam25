@@ -18,7 +18,7 @@ def readBattery(batteryData):
         next(reader, None)
         for row in reader:
             battery = Battery(row[0], row[1])
-            battery.extract_coordinates()
+            battery.extractCoordinates()
             batteries.append(battery)
         
     return batteries
