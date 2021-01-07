@@ -12,7 +12,7 @@ sys.path.append(os.path.join(directory, "code", "algoritmes"))
 
 from classHouse import House
 
-def readhouse(houseData):
+def readHouse(houseData):
 
     houses = []
 
