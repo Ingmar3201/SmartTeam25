@@ -1,5 +1,4 @@
 from classHouse import House
-import copy
 
 class Battery():
     def __init__(self, position, capacity):
@@ -24,6 +23,6 @@ class Battery():
     def addHouse(self, house):
         self._totalOutput += house.output
         self._housesDict[house] = abs(house.x - self.x) + abs(house.y - self.y)
-        return self._housesDict
+        return True
 
 

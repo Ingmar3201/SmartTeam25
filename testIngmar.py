@@ -15,12 +15,17 @@ from readHouse import readHouse
 
 houses = readHouse("data/district_1/district-1_houses.csv")
 batteries = readBattery("data/district_1/district-1_batteries.csv")
+cables = []
 
 testBat = batteries[0]
 testHouse = houses[0]
+cableTest = Cable(testHouse, testBat)
 
-print(testBat)
-print(testHouse)
+#print(testBat.addHouse(testHouse))
 
-print(testBat.addHouse(testHouse))
+cables.append(cableTest)
 
+print(f"x coordinate of house = {cables[0].house.x}")
+print(f"y coordinate of house = {cables[0].house.y}")
+print(f"x coordinate of battery = {cables[0].battery.x}")
+print(f"y coordinate of battery = {cables[0].battery.y}")
