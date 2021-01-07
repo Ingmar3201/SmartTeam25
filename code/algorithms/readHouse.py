@@ -20,7 +20,7 @@ def readHouse(houseData):
         reader = csv.reader(file)
         next(file, None)
         for row in reader:
-
-            houses.append(House(row[0], row[1], row[2]))
+            house = House(row[0], row[1], row[2])
+            houses.append(house)
 
     return houses

@@ -1,7 +1,12 @@
+from classHouse import House
+import copy
+
 class Battery():
     def __init__(self, position, capacity):
         self._position = position
         self.capacity = float(capacity)
+        self._housesDict = {}
+        self._totalOutput = 0
 
     def extractCoordinates(self):
         self.x = 0
@@ -15,3 +20,10 @@ class Battery():
             else:
                 temp += letter
         self.y = int(temp)
+    
+    def addHouse(self, house):
+        self._totalOutput += house.output
+        self._housesDict[house] = abs(house.x - self.x) + abs(house.y - self.y)
+        return self._housesDict
+
+

@@ -16,11 +16,11 @@ from readHouse import readHouse
 houses = readHouse("data/district_1/district-1_houses.csv")
 batteries = readBattery("data/district_1/district-1_batteries.csv")
 
-cableTest = []
-cableTest.append(Cable(houses[0], batteries[0]))
+testBat = batteries[0]
+testHouse = houses[0]
 
-print(f"house x = {houses[0].x}, house y = {houses[0].y}, battery x = {batteries[0].x}, battery y = {batteries[0].y}")
-print(cableTest[0].calcLength())
+print(testBat)
+print(testHouse)
 
-objTest = Objective(cableTest, batteries)
-print(objTest.totalCost())
+print(testBat.addHouse(testHouse))
+
