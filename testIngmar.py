@@ -25,7 +25,12 @@ cableTest = Cable(testHouse, testBat)
 
 cables.append(cableTest)
 
-print(f"x coordinate of house = {cables[0].house.x}")
-print(f"y coordinate of house = {cables[0].house.y}")
-print(f"x coordinate of battery = {cables[0].battery.x}")
-print(f"y coordinate of battery = {cables[0].battery.y}")
+print(f"x coordinate of house = {cables[0].x[0]}")
+print(f"y coordinate of house = {cables[0].y[0]}")
+
+print(f"x coordinate of corner = {cables[0].x[1]}")
+print(f"y coordinate of corner = {cables[0].y[1]}")
+
+print(f"x coordinate of battery = {cables[0].x[2]}")
+print(f"y coordinate of battery = {cables[0].y[2]}")
+
