@@ -14,9 +14,9 @@ sys.path.append(os.path.join(directory, "code", "algorithms"))
 
 from readBattery import readBattery
 from readHouse import readHouse
+from classCable import Cable 
 
-
-def plot(path_houses, path_batteries):
+def plot(path_houses, path_batteries, cables_list):
     batteries = readBattery(path_batteries)
     houses = readHouse(path_houses)
 
@@ -24,6 +24,7 @@ def plot(path_houses, path_batteries):
     house_y = []
     bat_x = []
     bat_y = []
+
 
     # gets data from dataReader.py
 
@@ -42,10 +43,21 @@ def plot(path_houses, path_batteries):
     fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
     fig.suptitle('District 1')
 
+    # plot house 
     ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = icon_size)
     ax.legend()
+
+    # plot bat
     ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = icon_size)
     ax.legend()
+
+    # plot cable 
+    for cable in cables_list:
+        x = cable.x
+        y = cable.y
+
+        ax.plot(x, y, '-', color = 'yellow', label = 'cable')
+        ax.legend()
 
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))

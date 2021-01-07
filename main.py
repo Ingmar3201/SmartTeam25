@@ -12,10 +12,24 @@ from classHouse import House
 from readBattery import readBattery
 from readHouse import readHouse
 from vis import plot
+from classCable import Cable
 
+# create path names
 housePath = "data/district_1/district-1_houses.csv"
 batteryPath =  "data/district_1/district-1_batteries.csv"
 
-readHouse(housePath)
-readBattery(batteryPath)
-plot(housePath, batteryPath)
+# create house- and battery objects and store them lists
+houses = readHouse(housePath)
+batteries = readBattery(batteryPath)
+
+# create test house bat and cable
+testBat = batteries[0]
+testHouse = houses[0]
+cableTest = Cable(testHouse, testBat)
+
+# store cable object in cablelist
+cables = []
+cables.append(cableTest)
+
+# plot district
+plot(housePath, batteryPath, cables)
