@@ -7,7 +7,7 @@ import numpy as np
 from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
 
 from classHouse import House 
-from classBattery import CBattery
+from classBattery import Battery
 from dataReader import houses
 from dataReader import batteries
 
