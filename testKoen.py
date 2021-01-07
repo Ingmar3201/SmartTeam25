@@ -13,4 +13,4 @@ from readBattery import readBattery
 from readHouse import readHouse
 from vis import plot
 
-plot()
+plot("data/district_1/district-1_houses.csv", "data/district_1/district-1_batteries.csv")

@@ -16,9 +16,9 @@ from readBattery import readBattery
 from readHouse import readHouse
 
 
-def plot():
-    batteries = readBattery("data/district_1/district-1_batteries.csv")
-    houses = readHouse("data/district_1/district-1_houses.csv")
+def plot(path_houses, path_batteries):
+    batteries = readBattery(path_batteries)
+    houses = readHouse(path_houses)
 
     house_x = []
     house_y = []
