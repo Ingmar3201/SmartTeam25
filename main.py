@@ -1,5 +1,6 @@
 import os, sys
 import csv
+import random
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -25,11 +26,17 @@ batteries = readBattery(batteryPath)
 # create test house bat and cable
 testBat = batteries[0]
 testHouse = houses[0]
-cableTest = Cable(testHouse, testBat)
-
-# store cable object in cablelist
 cables = []
-cables.append(cableTest)
+
+for i in range(150):
+    # random between 1 and 5
+    number = random.random() * 4
+    number = round(number)
+
+    cableTest = Cable(houses[i], batteries[number])
+
+    # store cable object in cablelist
+    cables.append(cableTest)
 
 # plot district
 plot(housePath, batteryPath, cables)

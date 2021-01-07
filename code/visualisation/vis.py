@@ -45,11 +45,11 @@ def plot(path_houses, path_batteries, cables_list):
 
     # plot house 
     ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = icon_size)
-    ax.legend()
+    
 
     # plot bat
     ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = icon_size)
-    ax.legend()
+    
 
     # plot cable 
     for cable in cables_list:
@@ -57,7 +57,7 @@ def plot(path_houses, path_batteries, cables_list):
         y = cable.y
 
         ax.plot(x, y, '-', color = 'yellow', label = 'cable')
-        ax.legend()
+    
 
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))
@@ -67,7 +67,7 @@ def plot(path_houses, path_batteries, cables_list):
 
     plt.grid(b=True, which='major', color='black', linestyle='-')
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
-
+    #ax.legend()
     plt.show()
 
 
