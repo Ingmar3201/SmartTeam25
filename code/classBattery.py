@@ -1,10 +1,10 @@
-class CBattery():
+class Battery():
     def __init__(self, position, capacity):
         self._position = position
         self.capacity = float(capacity)
         self.price = 5000
 
-    def coordinates(self):
+    def extract_coordinates(self):
         self.x = 0
         self.y = 0
         temp = ""
