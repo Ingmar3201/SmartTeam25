@@ -1,3 +1,7 @@
+"""
+Class house by freek
+"""
+
 class House:
     
     def __init__(self, x, y, output):
@@ -5,6 +9,3 @@ class House:
         self.x = int(x)
         self.y = int(y)
         self.output = float(output)
-    
-    def test(self):
-        print(self.x, self.y, self.output)

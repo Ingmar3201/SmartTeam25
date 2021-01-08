@@ -1,7 +1,3 @@
-"""
-battery objects by Ingmar
-"""
-
 import os, sys
 import csv
 
@@ -11,12 +7,18 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 from classBattery import Battery
 
 def readBattery(batteryData):
+    """
+    Reads data from csv file and creates battery class per line
+    All objects from class battery are stored in a list
+    """
+
     batteries = []
 
     id = 1
     with open(batteryData, 'r') as file:
         reader = csv.reader(file)
         next(reader, None)
+        
         for row in reader:
             battery = Battery(row[0], row[1])
             battery.extractCoordinates()
