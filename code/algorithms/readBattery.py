@@ -18,7 +18,7 @@ def readBattery(batteryData):
     with open(batteryData, 'r') as file:
         reader = csv.reader(file)
         next(reader, None)
-        
+
         for row in reader:
             battery = Battery(row[0], row[1])
             battery.extractCoordinates()
@@ -28,8 +28,3 @@ def readBattery(batteryData):
             
         
     return batteries
-
-
-    #for bat in batteries:
-    #    print(bat.x, bat.y)
-    #    print(bat.capacity)
