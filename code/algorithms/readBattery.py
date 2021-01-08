@@ -14,7 +14,7 @@ def readBattery(batteryData):
 
     batteries = []
 
-    id = 1
+    id = 0
     with open(batteryData, 'r') as file:
         reader = csv.reader(file)
         next(reader, None)
@@ -26,10 +26,4 @@ def readBattery(batteryData):
             batteries.append(battery)
             id += 1
             
-        
     return batteries
-
-
-    #for bat in batteries:
-    #    print(bat.x, bat.y)
-    #    print(bat.capacity)
