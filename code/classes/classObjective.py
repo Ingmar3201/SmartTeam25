@@ -1,7 +1,10 @@
 from classCable import Cable
 
 class Objective():
-
+    """
+    A class to calculate the objective function
+    The objective function is the total price of the network
+    """
     def __init__(self, cables, batteries):
         self.cables = cables
         self.batteries = batteries
