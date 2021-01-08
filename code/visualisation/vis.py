@@ -1,22 +1,30 @@
-# By Koen Smallegange 
-# For programmeertheorie - SmartTeam25
-# Splits data from dataReader.py and plots houses and batteries for 1 district
+'''
+programmeertheorie - SmartTeam25
+Gets data from objects and plots houses, batteries and cables
+'''
 
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
 import os, sys
 
+
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
 sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "code", "algorithms"))
 
+
 from readBattery import readBattery
 from readHouse import readHouse
 from classCable import Cable 
 
+
 def plot(path_houses, path_batteries, cables_list):
+    '''
+    Plots all houses batteries and cables and takes path to housedata batterydata and a list with cable objects
+    '''
+    # get list with house objects and battery objects
     batteries = readBattery(path_batteries)
     houses = readHouse(path_houses)
 
@@ -25,9 +33,7 @@ def plot(path_houses, path_batteries, cables_list):
     bat_x = []
     bat_y = []
 
-
-    # gets data from dataReader.py
-
+    # gets data from house objects and battery objects
     for house in houses:
         house_x.append(int(house.x))
         house_y.append(int(house.y))
@@ -36,12 +42,12 @@ def plot(path_houses, path_batteries, cables_list):
         bat_x.append(int(battery.x))
         bat_y.append(int(battery.y))
     
-    # plots single grid with seperate x and y cordslist for houses and batteries
     battery_size = 9
     house_size = 14
     fig_size = 12
     cable_width = 2
 
+    # plots single grid with seperate x and y cordslist for houses and batteries
     fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
     fig.suptitle('District 1')
 
@@ -51,8 +57,7 @@ def plot(path_houses, path_batteries, cables_list):
     # plot bat
     ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = battery_size)
     
-
-    # plot cable 
+    # plot cables and use diffrent colour for each battery
     for cable in cables_list:
         x = cable.x
         y = cable.y
@@ -72,16 +77,16 @@ def plot(path_houses, path_batteries, cables_list):
         elif cable.battery.id == 5:
             ax.plot(x, y, '-', color = 'pink', label = 'cable', linewidth = cable_width)
 
+    # plot grid
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))
   
-
     plt.xlim(-1, 51)
     plt.ylim(-1, 51)
 
+    # show visualisaton
     plt.grid(b=True, which='major', color='black', linestyle='-')
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
-    #ax.legend()
     plt.show()
 
 
