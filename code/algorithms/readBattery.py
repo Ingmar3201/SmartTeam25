@@ -13,13 +13,17 @@ from classBattery import Battery
 def readBattery(batteryData):
     batteries = []
 
+    id = 1
     with open(batteryData, 'r') as file:
         reader = csv.reader(file)
         next(reader, None)
         for row in reader:
             battery = Battery(row[0], row[1])
             battery.extractCoordinates()
+            battery.id = id
             batteries.append(battery)
+            id += 1
+            
         
     return batteries
 

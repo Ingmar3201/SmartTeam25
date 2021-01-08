@@ -6,6 +6,7 @@ class Battery():
         self.capacity = float(capacity)
         self._housesDict = {}
         self._totalOutput = 0
+        self.id = 0
 
     def extractCoordinates(self):
         self.x = 0

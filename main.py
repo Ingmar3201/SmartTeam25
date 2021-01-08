@@ -32,8 +32,7 @@ for i in range(150):
     # random between 1 and 5
     number = random.random() * 4
     number = round(number)
-
-    cableTest = Cable(houses[i], batteries[number])
+    cableTest = Cable(houses[i], batteries[int(number)])
 
     # store cable object in cablelist
     cables.append(cableTest)

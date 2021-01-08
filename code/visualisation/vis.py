@@ -37,18 +37,19 @@ def plot(path_houses, path_batteries, cables_list):
         bat_y.append(int(battery.y))
     
     # plots single grid with seperate x and y cordslist for houses and batteries
-    icon_size = 9
-    fig_size = 6
+    battery_size = 9
+    house_size = 14
+    fig_size = 12
+    cable_width = 2
 
     fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
     fig.suptitle('District 1')
 
     # plot house 
-    ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = icon_size)
+    ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = house_size)
     
-
     # plot bat
-    ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = icon_size)
+    ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = battery_size)
     
 
     # plot cable 
@@ -56,11 +57,24 @@ def plot(path_houses, path_batteries, cables_list):
         x = cable.x
         y = cable.y
 
-        ax.plot(x, y, '-', color = 'yellow', label = 'cable')
-    
+        if cable.battery.id == 1:
+            ax.plot(x, y, '-', color = 'yellow', label = 'cable', linewidth = cable_width)
+        
+        elif cable.battery.id == 2:
+            ax.plot(x, y, '-', color = 'purple', label = 'cable', linewidth = cable_width)
+        
+        elif cable.battery.id == 3:
+            ax.plot(x, y, '-', color = 'orange', label = 'cable', linewidth = cable_width)
+
+        elif cable.battery.id == 4:
+            ax.plot(x, y, '-', color = 'green', label = 'cable', linewidth = cable_width)
+
+        elif cable.battery.id == 5:
+            ax.plot(x, y, '-', color = 'brown', label = 'cable', linewidth = cable_width)
 
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))
+  
 
     plt.xlim(-1, 51)
     plt.ylim(-1, 51)
