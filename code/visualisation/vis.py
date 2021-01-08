@@ -70,7 +70,7 @@ def plot(path_houses, path_batteries, cables_list):
             ax.plot(x, y, '-', color = 'green', label = 'cable', linewidth = cable_width)
 
         elif cable.battery.id == 5:
-            ax.plot(x, y, '-', color = 'brown', label = 'cable', linewidth = cable_width)
+            ax.plot(x, y, '-', color = 'pink', label = 'cable', linewidth = cable_width)
 
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))
