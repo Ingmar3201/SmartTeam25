@@ -1,5 +1,4 @@
 '''
-programmeertheorie - SmartTeam25
 Gets data from objects and plots houses, batteries and cables
 '''
 
@@ -62,19 +61,19 @@ def plot(path_houses, path_batteries, cables_list):
         x = cable.x
         y = cable.y
 
-        if cable.battery.id == 1:
+        if cable.battery.id == 0:
             ax.plot(x, y, '-', color = 'yellow', label = 'cable', linewidth = cable_width)
         
-        elif cable.battery.id == 2:
+        elif cable.battery.id == 1:
             ax.plot(x, y, '-', color = 'purple', label = 'cable', linewidth = cable_width)
         
-        elif cable.battery.id == 3:
+        elif cable.battery.id == 2:
             ax.plot(x, y, '-', color = 'orange', label = 'cable', linewidth = cable_width)
 
-        elif cable.battery.id == 4:
+        elif cable.battery.id == 3:
             ax.plot(x, y, '-', color = 'green', label = 'cable', linewidth = cable_width)
 
-        elif cable.battery.id == 5:
+        elif cable.battery.id == 4:
             ax.plot(x, y, '-', color = 'pink', label = 'cable', linewidth = cable_width)
 
     # plot grid
