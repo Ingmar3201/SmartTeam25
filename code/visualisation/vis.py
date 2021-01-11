@@ -17,6 +17,8 @@ sys.path.append(os.path.join(directory, "code", "algorithms"))
 from readBattery import readBattery
 from readHouse import readHouse
 from classCable import Cable 
+from objective import objective
+
 
 
 def plot(path_houses, path_batteries, cables_list):
@@ -31,6 +33,9 @@ def plot(path_houses, path_batteries, cables_list):
     house_y = []
     bat_x = []
     bat_y = []
+
+    # get total cost
+    total_costs = objective(cables_list, batteries)
 
     # gets data from house objects and battery objects
     for house in houses:
@@ -86,6 +91,7 @@ def plot(path_houses, path_batteries, cables_list):
     # show visualisaton
     plt.grid(b=True, which='major', color='black', linestyle='-')
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
+    plt.title(total_costs)
     plt.show()
 
 

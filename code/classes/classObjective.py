@@ -1,10 +1,11 @@
+'''
+Calculates total cost of system
+'''
+
 from classCable import Cable
 
 class Objective():
-    """
-    A class to calculate the objective function
-    The objective function is the total price of the network
-    """
+
     def __init__(self, cables, batteries):
         self.cables = cables
         self.batteries = batteries
@@ -21,4 +22,9 @@ class Objective():
         total = cableSum * self._segmentCost + batterySum * self._batteryCost
         
         return total
+
+    def calcLength(self):
+        length = abs(self.house.x - self.battery.x) + abs(self.house.y - self.battery.y)
+        return length
+
 
