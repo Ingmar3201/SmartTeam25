@@ -7,7 +7,6 @@ import numpy as np
 from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
 import os, sys
 
-
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
 sys.path.append(os.path.join(directory, "code", "classes"))
@@ -18,7 +17,6 @@ from readBattery import readBattery
 from readHouse import readHouse
 from classCable import Cable 
 from objective import objective
-
 
 
 def plot(path_houses, path_batteries, cables_list):
@@ -93,6 +91,9 @@ def plot(path_houses, path_batteries, cables_list):
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
     plt.title(total_costs)
     plt.show()
+    plt.savefig('plotje.png')
+    
+
 
 
 
