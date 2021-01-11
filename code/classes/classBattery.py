@@ -40,5 +40,8 @@ class Battery():
         self._totalOutput += house.output
         self._housesDict[house] = abs(house.x - self.x) + abs(house.y - self.y)
         return True
+    
+    def checkHouse(self, house):
+        return self._totalOutput + house.output <= self.capacity
 
 
