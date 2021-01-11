@@ -24,18 +24,22 @@ houses = readHouse(housePath)
 batteries = readBattery(batteryPath)
 
 # create test house bat and cable
-testBat = batteries[0]
-testHouse = houses[0]
 cables = []
+count = 0
 
-for i in range(150):
+for house in houses:
+    count += 1
     # random between 1 and 5
     number = random.random() * 4
     number = round(number)
-    cableTest = Cable(houses[i], batteries[int(number)])
+    battery = batteries[int(number)]
+    if battery.checkHouse(house):
+        cable = battery.addHouse(house)
+        #print(f"{count} - {battery.addHouse(house)}")
+        cables.append(cable)
+    
+    #cableTest = Cable(houses[i], batteries[int(number)])
 
-    # store cable object in cablelist
-    cables.append(cableTest)
 
 # plot district
 plot(housePath, batteryPath, cables)
