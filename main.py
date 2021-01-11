@@ -28,7 +28,6 @@ cables = []
 count = 0
 
 for house in houses:
-    count += 1
     # random between 1 and 5
     number = random.random() * 4
     number = round(number)
@@ -37,9 +36,8 @@ for house in houses:
         cable = battery.addHouse(house)
         #print(f"{count} - {battery.addHouse(house)}")
         cables.append(cable)
-    
+        count += 1 
     #cableTest = Cable(houses[i], batteries[int(number)])
 
-
 # plot district
-plot(housePath, batteryPath, cables)
+plot(housePath, batteryPath, cables, count)
