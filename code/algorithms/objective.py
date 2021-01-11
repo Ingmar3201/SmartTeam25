@@ -1,25 +1,24 @@
+directory = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(directory, "code"))
+sys.path.append(os.path.join(directory, "code", "classes"))
 
 from classCable import Cable
 
-def objective():
+def objective(cables, batteries):
     """
-    A class to calculate the objective function
+    A function to calculate the objective function
     The objective function is the total price of the network
     """
-    def __init__(self, cables, batteries):
-        self.cables = cables
-        self.batteries = batteries
-        self._segmentCost = 9
-        self._batteryCost = 5000
+    segmentCost = 9
+    batteryCost = 5000
     
-    def totalCost(self):
-        cableSum = 0
-        for cable in self.cables:
-            cableSum += cable.calcLength()
+    cableSum = 0
+    for cable in cables:
+        cableSum += cable.calcLength()
 
-        batterySum = len(self.batteries)
+    batterySum = len(batteries)
 
-        total = cableSum * self._segmentCost + batterySum * self._batteryCost
-        
-        return total
+    total = cableSum * segmentCost + batterySum * batteryCost
+    
+    return total
 
