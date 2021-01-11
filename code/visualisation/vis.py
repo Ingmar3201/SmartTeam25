@@ -21,7 +21,7 @@ from objective import objective
 
 
 
-def plot(path_houses, path_batteries, cables_list):
+def plot(path_houses, path_batteries, cables_list, count):
     '''
     Plots all houses batteries and cables and takes path to housedata batterydata and a list with cable objects
     '''
@@ -92,6 +92,7 @@ def plot(path_houses, path_batteries, cables_list):
     plt.grid(b=True, which='major', color='black', linestyle='-')
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
     plt.title(total_costs)
+    plt.suptitle(count)
     plt.show()
 
 
