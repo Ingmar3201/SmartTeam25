@@ -48,4 +48,7 @@ class Battery():
     def checkHouse(self, house):
         return self._totalOutput + house.output <= self.capacity
 
+    def remainingCapacity(self):
+        return self.capacity - self._totalOutput
+
 
