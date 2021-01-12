@@ -1,7 +1,7 @@
 import os, sys
 import csv
 import random
-from random import randrange
+import time
 import matplotlib.pyplot as plt
 
 directory = os.path.dirname(os.path.realpath(__file__))
@@ -26,8 +26,9 @@ price_list = []
 iterations_list = []
 iteration = 0
 
+endTime = time.time() + 10
 
-for i in range(0, 100):
+while time.time() < endTime:
 
     noFit = True
     while noFit:
@@ -76,4 +77,4 @@ for i in range(0, 100):
 
 
 plt.plot(iterations_list, price_list)
-plt.show()
+plt.savefig('lijnPlot.png')
