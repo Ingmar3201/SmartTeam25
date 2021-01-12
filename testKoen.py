@@ -1,7 +1,6 @@
 import os, sys
-import csv
 import random
-from random import randrange
+import time
 import matplotlib.pyplot as plt
 
 directory = os.path.dirname(os.path.realpath(__file__))
@@ -26,12 +25,13 @@ price_list = []
 iterations_list = []
 iteration = 0
 
+endTime = time.time() + 15 
 
-for i in range(0, 100):
+while time.time() < endTime:
 
     noFit = True
     while noFit:
-
+        
         # create house- and battery objects and store them in lists
         houses = readHouse(housePath)
         batteries = readBattery(batteryPath)
@@ -50,16 +50,7 @@ for i in range(0, 100):
 
         solution = Objective(cables, batteries)
         current_price = solution.totalCost()
-        
-        # print(f"battery0: {batteries[0].remainingCapacity()}")
-        # print(f"battery1: {batteries[1].remainingCapacity()}")
-        # print(f"battery2: {batteries[2].remainingCapacity()}")
-        # print(f"battery3: {batteries[3].remainingCapacity()}")
-        # print(f"battery4: {batteries[4].remainingCapacity()}")
-        # print(f"last house output: {house.output}")
-        # print(f"current price: {current_price}")
-        # print(f"total cables {len(cables)}")
-        
+                
         totCableLength = 0
         for cable in cables:
             totCableLength += cable.calcLength()
@@ -69,11 +60,15 @@ for i in range(0, 100):
     iteration += 1
     iterations_list.append(iteration)
     price_list.append(current_price)
-    print(iteration)
+    #print(iteration)
 
     # # plot district
     # plot(housePath, batteryPath, cables, len(cables))
 
-
+average = round(sum(price_list) / len(price_list), 2)
+max_price = max(price_list)
+min_price = min(price_list)
 plt.hist(price_list, bins = 100)
-plt.show()
+plt.suptitle("Verdeling van prijzen")
+plt.title((f"Maximale prijs: {max_price}; Mininmale prijs: {min_price}; Gemiddelde prijs: {average}"))
+plt.savefig('histogram.png')
