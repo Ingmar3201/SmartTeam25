@@ -25,11 +25,12 @@ noFit = True
 
 while noFit:
 
-    # create house- and battery objects and store them lists
-    houses = readHouse(housePath)
-    houses = bubblesort(houses)
+    # create house- and battery objects and store them in lists
+    houses = random.shuffle(readHouse(housePath))
     batteries = readBattery(batteryPath)
     cables = []
+
+    # random.shuffle(houses)
 
     for house in houses:
         random.shuffle(batteries)
@@ -40,15 +41,14 @@ while noFit:
                 cables.append(cable)
                 break
 
-    print(f"battery0: {batteries[0].remainingCapacity()}")
-    print(f"battery1: {batteries[1].remainingCapacity()}")
-    print(f"battery2: {batteries[2].remainingCapacity()}")
-    print(f"battery3: {batteries[3].remainingCapacity()}")
-    print(f"battery4: {batteries[4].remainingCapacity()}")
+    # print(f"battery0: {batteries[0].remainingCapacity()}")
+    # print(f"battery1: {batteries[1].remainingCapacity()}")
+    # print(f"battery2: {batteries[2].remainingCapacity()}")
+    # print(f"battery3: {batteries[3].remainingCapacity()}")
+    # print(f"battery4: {batteries[4].remainingCapacity()}")
 
-    print(len(cables))
+    # print(len(cables))
     noFit = len(cables) != len(houses)
-
 
 # plot district
 plot(housePath, batteryPath, cables, len(cables))
