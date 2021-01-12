@@ -25,12 +25,18 @@ price_list = []
 iterations_list = []
 iteration = 0
 
-endTime = time.time() + 60 * 30
+endTime = time.time() + 60 * 120
+prevMinute = 0.0
 
 while time.time() < endTime:
+    
+    currentMinute = round((endTime - time.time())/60,1)
+    if currentMinute != prevMinute:
+        prevMinute = currentMinute
+        print(f"remaining minutes: {prevMinute}")
 
-    print(round(endTime - time.time(),2))
     noFit = True
+
     while noFit:
         
         # create house- and battery objects and store them in lists
@@ -61,10 +67,6 @@ while time.time() < endTime:
         # print(f"current price: {current_price}")
         # print(f"total cables {len(cables)}")
         
-        totCableLength = 0
-        for cable in cables:
-            totCableLength += cable.calcLength()
-        
         noFit = len(cables) != len(houses)
         
     iteration += 1
@@ -78,9 +80,14 @@ while time.time() < endTime:
 #plt.plot(iterations_list, price_list)
 #plt.savefig('lijnPlot.png')
 
-print(iteration)
+print(f"total iteration: {iteration}")
 
-bins = int(max(iteration/100, 10))
+#bins = int(max(iteration/100, 10))
+#bins = int(max(iteration ** 0.5, 10))
+#bins = int(min(iteration**0.5 / 2 + 50, 350))
+#bins = int(2*iteration**(2/5))
+bins = int(min(iteration**(2/5) + 1, 100))
+print(f"amount of bins = {bins}")
 
 average = round(sum(price_list) / len(price_list), 2)
 max_price = max(price_list)
@@ -91,3 +98,4 @@ plt.title((f"Maximale prijs: {max_price}; Mininmale prijs: {min_price}; Gemiddel
 plt.xlabel("Prijs van het grid")
 plt.ylabel("Frequentie")
 plt.savefig('histogram.png')
+
