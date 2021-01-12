@@ -25,7 +25,7 @@ price_list = []
 iterations_list = []
 iteration = 0
 
-endTime = time.time() + 60 * 5
+endTime = time.time() + 60 * 30
 
 while time.time() < endTime:
 
@@ -79,5 +79,15 @@ while time.time() < endTime:
 #plt.savefig('lijnPlot.png')
 
 print(iteration)
-plt.hist(price_list, bins = 100)
+
+bins = int(max(iteration/100, 10))
+
+average = round(sum(price_list) / len(price_list), 2)
+max_price = max(price_list)
+min_price = min(price_list)
+plt.hist(price_list, bins = bins)
+plt.suptitle("Verdeling van prijzen")
+plt.title((f"Maximale prijs: {max_price}; Mininmale prijs: {min_price}; Gemiddelde prijs: {average}"))
+plt.xlabel("Prijs van het grid")
+plt.ylabel("Frequentie")
 plt.savefig('histogram.png')
