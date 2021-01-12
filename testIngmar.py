@@ -1,5 +1,7 @@
 import os, sys
 import csv
+from random import randrange
+
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -20,3 +22,7 @@ cables = []
 testBat = batteries[0]
 testHouse = houses[0]
 cableTest = Cable(testHouse, testBat)
+
+
+while True:
+    print(randrange(5))

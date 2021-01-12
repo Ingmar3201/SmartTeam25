@@ -19,10 +19,6 @@ from classCable import Cable
 from objective import objective
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> adc0bbab0984cc72f9381c208a471d72a9aad054
 def plot(path_houses, path_batteries, cables_list, count):
     '''
     Plots all houses batteries and cables and takes path to housedata batterydata and a list with cable objects

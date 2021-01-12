@@ -1,6 +1,7 @@
 import os, sys
 import csv
 import random
+from random import randrange
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -31,18 +32,13 @@ while noFit:
     cables = []
 
     for house in houses:
-        # random between 0 and 4
-        battery = batteries[int(round(random.random() * 4))]
-        
-        quitCount = 10
-        for i in range(quitCount):
-            countTest = 0
+        random.shuffle(batteries)
+                
+        for battery in batteries:
             if battery.checkHouse(house):
                 cable = battery.addHouse(house)
                 cables.append(cable)
-                break                
-            else:
-                battery = batteries[int(round(random.random() * 4))]
+                break
 
     print(f"battery0: {batteries[0].remainingCapacity()}")
     print(f"battery1: {batteries[1].remainingCapacity()}")
@@ -52,7 +48,6 @@ while noFit:
 
     print(len(cables))
     noFit = len(cables) != len(houses)
-    print(noFit)
 
 
 # plot district
