@@ -1,5 +1,4 @@
 import os, sys
-import csv
 import random
 import time
 import matplotlib.pyplot as plt
@@ -26,13 +25,14 @@ price_list = []
 iterations_list = []
 iteration = 0
 
-endTime = time.time() + 10
+endTime = time.time() + 60 * 5
 
 while time.time() < endTime:
 
+    print(round(endTime - time.time(),2))
     noFit = True
     while noFit:
-
+        
         # create house- and battery objects and store them in lists
         houses = readHouse(housePath)
         batteries = readBattery(batteryPath)
@@ -70,11 +70,14 @@ while time.time() < endTime:
     iteration += 1
     iterations_list.append(iteration)
     price_list.append(current_price)
-    print(iteration)
+    #print(iteration)
 
     # # plot district
     # plot(housePath, batteryPath, cables, len(cables))
 
+#plt.plot(iterations_list, price_list)
+#plt.savefig('lijnPlot.png')
 
-plt.plot(iterations_list, price_list)
-plt.savefig('lijnPlot.png')
+print(iteration)
+plt.hist(price_list, bins = 100)
+plt.savefig('histogram.png')
