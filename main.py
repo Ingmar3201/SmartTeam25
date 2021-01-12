@@ -16,6 +16,7 @@ from readHouse import readHouse
 from vis import plot
 from classCable import Cable
 from bubblesort import bubblesort
+from classObjective import Objective
 
 # create path names
 housePath = "data/district_1/district-1_houses.csv"
@@ -41,12 +42,16 @@ while noFit:
                 cables.append(cable)
                 break
 
+    solution = Objective(cables, batteries)
+    current_price = solution.totalCost()
+    
     print(f"battery0: {batteries[0].remainingCapacity()}")
     print(f"battery1: {batteries[1].remainingCapacity()}")
     print(f"battery2: {batteries[2].remainingCapacity()}")
     print(f"battery3: {batteries[3].remainingCapacity()}")
     print(f"battery4: {batteries[4].remainingCapacity()}")
-    print(f"last house output = {house.output}")
+    print(f"last house output: {house.output}")
+    print(f"current price: {current_price}")
     
     totCableLength = 0
     for cable in cables:
