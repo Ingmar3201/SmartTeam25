@@ -2,6 +2,7 @@ import os, sys
 import csv
 import random
 from random import randrange
+import matplotlib.pyplot as plt
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -21,45 +22,58 @@ from classObjective import Objective
 # create path names
 housePath = "data/district_1/district-1_houses.csv"
 batteryPath =  "data/district_1/district-1_batteries.csv"
+price_list = []
+iterations_list = []
+iteration = 0
 
-noFit = True
 
-while noFit:
+for i in range(0, 100):
 
-    # create house- and battery objects and store them in lists
-    houses = readHouse(housePath)
-    batteries = readBattery(batteryPath)
-    cables = []
+    noFit = True
+    while noFit:
 
-    random.shuffle(houses)
+        # create house- and battery objects and store them in lists
+        houses = readHouse(housePath)
+        batteries = readBattery(batteryPath)
+        cables = []
 
-    for house in houses:
-        random.shuffle(batteries)
+        random.shuffle(houses)
 
-        for battery in batteries:
-            if battery.checkHouse(house):
-                cable = battery.addHouse(house)
-                cables.append(cable)
-                break
+        for house in houses:
+            random.shuffle(batteries)
 
-    solution = Objective(cables, batteries)
-    current_price = solution.totalCost()
-    
-    print(f"battery0: {batteries[0].remainingCapacity()}")
-    print(f"battery1: {batteries[1].remainingCapacity()}")
-    print(f"battery2: {batteries[2].remainingCapacity()}")
-    print(f"battery3: {batteries[3].remainingCapacity()}")
-    print(f"battery4: {batteries[4].remainingCapacity()}")
-    print(f"last house output: {house.output}")
-    print(f"current price: {current_price}")
-    
-    totCableLength = 0
-    for cable in cables:
-        totCableLength += cable.calcLength()
-    
-    print(f"total cables {len(cables)}")
-    print()
-    noFit = len(cables) != len(houses)
+            for battery in batteries:
+                if battery.checkHouse(house):
+                    cable = battery.addHouse(house)
+                    cables.append(cable)
+                    break
 
-# plot district
-plot(housePath, batteryPath, cables, len(cables))
+        solution = Objective(cables, batteries)
+        current_price = solution.totalCost()
+        
+        # print(f"battery0: {batteries[0].remainingCapacity()}")
+        # print(f"battery1: {batteries[1].remainingCapacity()}")
+        # print(f"battery2: {batteries[2].remainingCapacity()}")
+        # print(f"battery3: {batteries[3].remainingCapacity()}")
+        # print(f"battery4: {batteries[4].remainingCapacity()}")
+        # print(f"last house output: {house.output}")
+        # print(f"current price: {current_price}")
+        # print(f"total cables {len(cables)}")
+        
+        totCableLength = 0
+        for cable in cables:
+            totCableLength += cable.calcLength()
+        
+        noFit = len(cables) != len(houses)
+        
+    iteration += 1
+    iterations_list.append(iteration)
+    price_list.append(current_price)
+    print(iteration)
+
+    # # plot district
+    # plot(housePath, batteryPath, cables, len(cables))
+
+
+plt.plot(iterations_list, price_list)
+plt.show()
