@@ -34,13 +34,14 @@ while noFit:
 
     for house in houses:
         random.shuffle(batteries)
-                
+
         for battery in batteries:
             if battery.checkHouse(house):
                 cable = battery.addHouse(house)
                 cables.append(cable)
                 break
 
+<<<<<<< HEAD
     # print(f"battery0: {batteries[0].remainingCapacity()}")
     # print(f"battery1: {batteries[1].remainingCapacity()}")
     # print(f"battery2: {batteries[2].remainingCapacity()}")
@@ -48,6 +49,21 @@ while noFit:
     # print(f"battery4: {batteries[4].remainingCapacity()}")
 
     # print(len(cables))
+=======
+    print(f"battery0: {batteries[0].remainingCapacity()}")
+    print(f"battery1: {batteries[1].remainingCapacity()}")
+    print(f"battery2: {batteries[2].remainingCapacity()}")
+    print(f"battery3: {batteries[3].remainingCapacity()}")
+    print(f"battery4: {batteries[4].remainingCapacity()}")
+    print(f"last house output = {house.output}")
+    
+    totCableLength = 0
+    for cable in cables:
+        totCableLength += cable.calcLength()
+    
+    print(f"total cables {len(cables)}")
+    print()
+>>>>>>> 6aaf68ee1d3d66072588f8c4c3d92c1ba396e02b
     noFit = len(cables) != len(houses)
 
 # plot district
