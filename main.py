@@ -19,13 +19,18 @@ from bubblesort import bubblesort
 from classObjective import Objective
 
 # create path names
-housePath = "data/district_1/district-1_houses.csv"
-batteryPath =  "data/district_1/district-1_batteries.csv"
+#housePath = "data/district_1/district-1_houses.csv"
+#batteryPath =  "data/district_1/district-1_batteries.csv"
+#housePath = "data/district_2/district-2_houses.csv"
+#batteryPath =  "data/district_2/district-2_batteries.csv"
+housePath = "data/district_3/district-3_houses.csv"
+batteryPath =  "data/district_3/district-3_batteries.csv"
+
 price_list = []
 iterations_list = []
 iteration = 0
 
-endTime = time.time() + 60 * 120
+endTime = time.time() + 60 * 20
 prevMinute = 0.0
 
 while time.time() < endTime:
@@ -99,3 +104,4 @@ plt.xlabel("Prijs van het grid")
 plt.ylabel("Frequentie")
 plt.savefig('histogram.png')
 
+#plot(housePath, batteryPath, cables, len(cables))
