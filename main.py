@@ -18,20 +18,12 @@ from classCable import Cable
 from bubblesort import bubblesort
 from classObjective import Objective
 
-<<<<<<< HEAD
-# create path names and variables 
-housePath = "data/district_1/district-1_houses.csv"
-batteryPath =  "data/district_1/district-1_batteries.csv"
-=======
-# create path names
-#housePath = "data/district_1/district-1_houses.csv"
-#batteryPath =  "data/district_1/district-1_batteries.csv"
-#housePath = "data/district_2/district-2_houses.csv"
-#batteryPath =  "data/district_2/district-2_batteries.csv"
-housePath = "data/district_3/district-3_houses.csv"
-batteryPath =  "data/district_3/district-3_batteries.csv"
 
->>>>>>> 8651d81298ca432eb230fd3fec781e9ecd887a73
+# create path names
+district = 1
+housePath = f"data/district_{district}/district-{district}_houses.csv"
+batteryPath =  f"data/district_{district}/district-{district}_batteries.csv"
+
 price_list = []
 iterations_list = []
 iteration = 0
