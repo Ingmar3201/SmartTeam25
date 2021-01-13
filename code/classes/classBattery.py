@@ -51,4 +51,7 @@ class Battery():
     def remainingCapacity(self):
         return self.capacity - self._totalOutput
 
+    def calcLength(self, house):
+        length = abs(house.x - self.x) + abs(house.y - self.y)
+        return length
 
