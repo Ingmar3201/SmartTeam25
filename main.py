@@ -18,7 +18,7 @@ from classCable import Cable
 from bubblesort import bubblesort
 from classObjective import Objective
 
-# create path names
+# create path names and variables 
 housePath = "data/district_1/district-1_houses.csv"
 batteryPath =  "data/district_1/district-1_batteries.csv"
 price_list = []
