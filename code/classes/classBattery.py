@@ -11,6 +11,7 @@ class Battery():
         self._housesDict = {}
         self.housesList = []
         self._totalOutput = 0
+        self.totalOutput = 0.0
         self.id = 0
 
     def extractCoordinates(self):

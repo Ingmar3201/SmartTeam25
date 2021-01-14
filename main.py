@@ -28,17 +28,8 @@ houses, batteries, cables = initialSolution(district)
 solution = Objective(cables, batteries)
 initialPrice = solution.totalCost()
 
-#plot district
-#plot(housePath, batteryPath, cables, len(cables))
-
-print(f"battery0: {batteries[0].remainingCapacity()}")
-print(f"battery1: {batteries[1].remainingCapacity()}")
-print(f"battery2: {batteries[2].remainingCapacity()}")
-print(f"battery3: {batteries[3].remainingCapacity()}")
-print(f"battery4: {batteries[4].remainingCapacity()}")
 print(f"initial price: {initialPrice}")
 print(f"total cables {len(cables)}")
-
 print("___________________________")
 
 reps, bestPrice = randomSwap(60 * 0.20, houses, batteries, cables, district)
@@ -49,3 +40,6 @@ improvedPrice = solution.totalCost()
 print("___________________________")
 print(f"reps: {reps}")
 print(f"best price: {bestPrice}")
+
+#plot district
+#plot(housePath, batteryPath, cables, len(cables))
