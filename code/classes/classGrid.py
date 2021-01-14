@@ -1,7 +1,7 @@
 class Grid():
     def __init__(self, district):
         self.district = district
-        self._points = {}
+        #self._points = {}
         self._batteries = []
         self._houses = []
         self._cables = []
@@ -12,3 +12,5 @@ class Grid():
     def addBattery(self, battery):
         pass
 
+    def connect(self, house, battery):
+        pass
