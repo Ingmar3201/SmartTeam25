@@ -50,6 +50,10 @@ class Grid():
         return True
 
     def makeConnection(self, house, battery):
+        """
+        Adds a cable object to the cables dictionairy
+        Recalculates totalOutput of the battery
+        """
         # restrict houses to single connection
         if house in self.cables:
             return False
@@ -60,6 +64,10 @@ class Grid():
         return True
 
     def removeConnection(self, house):
+        """
+        Removes the cable object from the cables dictionairy
+        Recalculates totalOutput of the battery
+        """
         if house in self.cables:
             battery = self.cables[house].battery
             del self.cables[house]
@@ -69,16 +77,23 @@ class Grid():
         return False
 
     def hasConnection(self, house):
+        """
+        Checks if the house has a connection
+        """
         return house in self.cables
 
     def makePlot(self):
         pass
 
     def housesPerBattery(self, battery):
+        """
+        Returns a list of all houses connected to a given battery
+        """
         housesInBattery = []
         for house in self.houses:
-            if self.cables[house].battery == battery:
-                housesInBattery.append(house)
+            if house in self.cables:
+                if self.cables[house].battery == battery:
+                    housesInBattery.append(house)
 
         if len(housesInBattery) != 0:
             return housesInBattery
@@ -86,6 +101,9 @@ class Grid():
         return False
 
     def cablesList(self):
+        """
+        Makes a list of all the cable objects in the cables dictionairy
+        """
         cablesList = []
         for house in self.houses:
             cablesList.append(self.cables[house])
@@ -93,6 +111,9 @@ class Grid():
         return cablesList
 
     def totalCost(self):
+        """
+        Calculates the total cost the the battery - cable configuration of this grid
+        """
         segmentCost = 9
         batteryCost = 5000
         cableSum = 0

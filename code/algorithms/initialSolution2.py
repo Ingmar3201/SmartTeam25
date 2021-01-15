@@ -26,8 +26,6 @@ def initialSolution2(district):
     grid.houses = bubblesort(grid.houses)
     freeHouses = []
 
-    
-
     # start solution
     for house in grid.houses:
         # print(house.output)
@@ -45,7 +43,8 @@ def initialSolution2(district):
     while len(grid.cables) < 150:
 
         for battery in grid.batteries:
-            housesInBattery = bubblesort(grid.housesPerBattery(battery))
+            housesInBattery = grid.housesPerBattery(battery)
+            #housesInBattery = bubblesort(grid.housesPerBattery(battery))
             house = housesInBattery[-1]
             grid.removeConnection(house)
             freeHouses.append(house)
@@ -64,8 +63,8 @@ def initialSolution2(district):
                     if grid.hasConnection(house):
                         grid.removeConnection(house)
             else:
-                print(f"i: {i}")
-                print(f"amount freeHouses: {len(freeHouses)}")
+                #print(f"i: {i}")
+                #print(f"amount freeHouses: {len(freeHouses)}")
                 break
         
     return grid
