@@ -147,7 +147,7 @@ class Grid():
             output.append(batteryInfo)
         
         now = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
-        filename = f"resultaten/output_dist{self.district}_{now}.json"
+        filename = f"results/output_dist{self.district}_{now}.json"
 
         with open(filename, 'w') as outfile:
             json.dump(output, outfile, indent=3, sort_keys=True)
