@@ -2,6 +2,7 @@ import os, sys
 import random
 import time
 import matplotlib.pyplot as plt
+import copy
 
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
@@ -21,9 +22,10 @@ from classObjective import Objective
 from initialSolution2 import initialSolution2
 
 def randomSwap2(runtime, grid):
-    bestPrice = 70000
-    limitPrice = 70000
+    bestPrice = grid.totalCost()
+    limitPrice = bestPrice * 1.2
     reps = 0
+    bestGrid = grid
 
     endTime = time.time() + runtime
     prevMinute = 0.0
@@ -56,6 +58,7 @@ def randomSwap2(runtime, grid):
 
         if improvedPrice < bestPrice:
             bestPrice = improvedPrice
+            bestGrid = copy.deepcopy(grid)
 
         if improvedPrice > limitPrice:
             grid = initialSolution2(grid.district)
@@ -64,4 +67,4 @@ def randomSwap2(runtime, grid):
         # district 2: min objective: 45268
         # district 3: min objective: 42757
 
-    return reps, bestPrice
+    return reps, bestPrice, bestGrid

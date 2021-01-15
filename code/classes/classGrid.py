@@ -1,4 +1,6 @@
 import csv
+import json
+import datetime
 
 from classBattery import Battery
 from classHouse import House
@@ -126,3 +128,29 @@ class Grid():
         total = cableSum * segmentCost + batterySum * batteryCost
         
         return total
+    
+    def output(self):
+        """
+
+        """
+        output = [{"district":self.district, "own-costs":self.totalCost()}]
+        for battery in self.batteries:
+            housesInfo = []
+            houses = self.housesPerBattery(battery)
+            for house in houses:
+                cableInfo = []
+                for i in range(len(self.cables[house].x)):
+                    cableInfo.append(f"{self.cables[house].x[i]},{self.cables[house].y[i]}")
+                housesInfo.append({"location":f"{house.x},{house.y}", "output":house.output, "cables":cableInfo})
+            
+            batteryInfo = {"location":f"{battery.x},{battery.y}", "capacity":battery.capacity, "houses":housesInfo}
+            output.append(batteryInfo)
+        
+        now = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
+        filename = f"resultaten/output_dist{self.district}_{now}.json"
+
+        with open(filename, 'w') as outfile:
+            json.dump(output, outfile, indent=3, sort_keys=True)
+        
+        return True
+        #return json.dumps(output, indent=3, sort_keys=True)

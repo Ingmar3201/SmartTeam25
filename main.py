@@ -3,6 +3,7 @@ import random
 import time
 import matplotlib.pyplot as plt
 
+
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code"))
 sys.path.append(os.path.join(directory, "code", "classes"))
@@ -22,8 +23,8 @@ from classObjective import Objective
 from initialSolution2 import initialSolution2
 from randomSwap2 import randomSwap2
 
-district = 2
-runtime = 60 * 0.2
+district = 1
+runtime = 60 * 0.001
 
 grid = initialSolution2(district)
 
@@ -37,11 +38,18 @@ print(f"total cables {len(grid.cables)}")
 print("___________________________")
 
 
-reps, bestPrice = randomSwap2(runtime, grid)
+#reps, bestPrice, bestGrid = randomSwap2(runtime, grid)
 
-print("___________________________")
-print(f"reps: {reps}")
-print(f"best price: {bestPrice}")
+#print("___________________________")
+#print(f"reps: {reps}")
+#print(f"best price: {bestPrice}")
 
 #plot district
 #plot(housePath, batteryPath, cables, len(cables))
+
+print("___________________________")
+
+grid.output()
+
+
+
