@@ -26,9 +26,9 @@ print(f"battery total output: {battery.totalOutput}")
 print(f"total cables: {len(grid.cables)}")
 print("____________________________________")
 
-print(f"can remove connection = {grid.removeConnection(house, battery)}")
+print(f"can remove connection = {grid.removeConnection(house)}")
 #print(f"cable connection: {grid.cables[house]}: {grid.cables[house].battery} - {grid.cables[house].house}")
-print(f"can remove connection = {grid.removeConnection(house, battery)}")
+print(f"can remove connection = {grid.removeConnection(house)}")
 print(f"battery total output: {battery.totalOutput}")
 print(f"total cables: {len(grid.cables)}")
 

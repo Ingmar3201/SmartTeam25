@@ -11,6 +11,7 @@ sys.path.append(os.path.join(directory, "code", "visualisation"))
 
 from classBattery import Battery
 from classHouse import House
+from classGrid import Grid
 from readBattery import readBattery
 from readHouse import readHouse
 from vis import plot
@@ -18,24 +19,24 @@ from classCable import Cable
 from bubblesort import bubblesort
 from bubblesortBattery import bubblesortBattery
 from classObjective import Objective
-from initialSolution import initialSolution
-from randomSwap import randomSwap
+from initialSolution2 import initialSolution2
+from randomSwap2 import randomSwap2
 
 district = 1
 
-houses, batteries, cables = initialSolution(district)
+grid = initialSolution2(district)
 
-solution = Objective(cables, batteries)
-initialPrice = solution.totalCost()
+startPrice = grid.totalCost()
 
-print(f"initial price: {initialPrice}")
-print(f"total cables {len(cables)}")
+for battery in grid.batteries:
+    print(battery.remainingCapacity())
+
+print(f"initial price: {startPrice}")
+print(f"total cables {len(grid.cables)}")
 print("___________________________")
 
-reps, bestPrice = randomSwap(60 * 0.20, houses, batteries, cables, district)
 
-solution = Objective(cables, batteries)
-improvedPrice = solution.totalCost()
+reps, bestPrice = randomSwap2(60 * 1, grid)
 
 print("___________________________")
 print(f"reps: {reps}")

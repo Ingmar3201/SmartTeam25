@@ -62,10 +62,16 @@ class Battery():
         
         return False
     
-    def checkHouse(self, house):
+    def checkHouseOUD(self, house):
         return self._totalOutput + house.output <= self.capacity
+    
+    def checkHouse(self, house):
+        return self.totalOutput + house.output <= self.capacity
 
     def remainingCapacity(self):
+        return self.capacity - self.totalOutput
+
+    def remainingCapacityOUD(self):
         return self.capacity - self._totalOutput
 
     def calcLength(self, house):

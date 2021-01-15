@@ -17,7 +17,6 @@ class Grid():
         Reads data from csv file and creates house class per line
         All objects from class house are stored in a list
         """
-
         self.houses = []
         houseData = f"data/district_{self.district}/district-{self.district}_houses.csv"
 
@@ -36,7 +35,6 @@ class Grid():
         Reads data from csv file and creates battery class per line
         All objects from class battery are stored in a list
         """
-        
         self.batteries = []
         batteryData = f"data/district_{self.district}/district-{self.district}_batteries.csv"
         
@@ -61,8 +59,9 @@ class Grid():
         battery.totalOutput += house.output
         return True
 
-    def removeConnection(self, house, battery):
+    def removeConnection(self, house):
         if house in self.cables:
+            battery = self.cables[house].battery
             del self.cables[house]
             battery.totalOutput -= house.output
             return True
@@ -74,3 +73,35 @@ class Grid():
 
     def makePlot(self):
         pass
+
+    def housesPerBattery(self, battery):
+        housesInBattery = []
+        for house in self.houses:
+            if self.cables[house].battery == battery:
+                housesInBattery.append(house)
+
+        if len(housesInBattery) != 0:
+            return housesInBattery
+        
+        return False
+
+    def cablesList(self):
+        cablesList = []
+        for house in self.houses:
+            cablesList.append(self.cables[house])
+        
+        return cablesList
+
+    def totalCost(self):
+        segmentCost = 9
+        batteryCost = 5000
+        cableSum = 0
+        for house in self.houses:
+            cable = self.cables[house]
+            cableSum += cable.calcLength()
+
+        batterySum = len(self.batteries)
+
+        total = cableSum * segmentCost + batterySum * batteryCost
+        
+        return total
