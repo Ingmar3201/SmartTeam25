@@ -22,9 +22,7 @@ class InitialSolution():
             self.grid.batteries = bubblesortBattery(self.grid.batteries, house)
 
             for battery in self.grid.batteries:
-                if not self.grid.hasConnection(house):
-                    self.grid.makeConnection(house, battery)
-                    self.grid.cables[house]
+                if self.grid.makeConnection(house, battery):
                     break
 
             if not self.grid.hasConnection(house):
@@ -43,8 +41,7 @@ class InitialSolution():
             for house in self.freeHouses:
                 self.grid.batteries = bubblesortBattery(self.grid.batteries, house)
                 for battery in self.grid.batteries:
-                    if self.grid.hasConnection(house):
-                        self.grid.makeConnection(house, battery)
+                    if self.grid.makeConnection(house, battery):
                         break
 
             if len(self.grid.cables) < 150:
@@ -57,7 +54,7 @@ class InitialSolution():
     def runAlgorithm(self):
         self.start()
 
-        #while len(self.grid.cables) < 150:
-            #self.connectAll()
+        while len(self.grid.cables) < 150:
+            self.connectAll()
 
         return True

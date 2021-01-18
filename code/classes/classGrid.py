@@ -67,7 +67,7 @@ class Grid():
         # restrict houses to single connection
         if house in self.cables:
             return False
-        elif battery.totalOutput + house.output <= battery.capacity:
+        elif battery.totalOutput + house.output > battery.capacity:
             return False
         
         cable = Cable(house, battery)
