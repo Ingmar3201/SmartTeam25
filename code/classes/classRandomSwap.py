@@ -23,7 +23,7 @@ from initialSolution2 import initialSolution2
 
 class randomSwap(initialGrid):
 
-    def __init__(self, district):
+    def __init__(self, district, initialGrid):
         self.grid = initialGrid
         self.initialSolution = initialGrid
         
