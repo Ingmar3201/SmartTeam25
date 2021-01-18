@@ -10,16 +10,16 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "code", "algorithms"))
 sys.path.append(os.path.join(directory, "code", "visualisation"))
 
-from classBattery import Battery
-from classHouse import House
+#from classBattery import Battery
+#from classHouse import House
 from classGrid import Grid
-from readBattery import readBattery
-from readHouse import readHouse
-from vis import plot
-from classCable import Cable
+#from readBattery import readBattery
+#from readHouse import readHouse
+#from vis import plot
+#from classCable import Cable
 from bubblesort import bubblesort
 from bubblesortBattery import bubblesortBattery
-from classObjective import Objective
+#from classObjective import Objective
 from classInitialSolution import InitialSolution
 
 
@@ -37,15 +37,18 @@ class RandomSwap():
     def runAlgorithm(self, runtime):
         self.randomSwap(runtime)
 
-        return self.bestPrice
+        return self.bestCables
 
 
     def randomSwap(self, runtime):
-        bestPrice = self.grid.totalCost()
-        limitPrice = bestPrice * 1.2
+        self.bestPrice = self.grid.totalCost()
+        limitPrice = self.bestPrice * 1.2
         reps = 0
+        self.bestCables = copy.deepcopy(self.grid.cables)
+        #initialCables = copy.deepcopy(self.grid.cables)
+        #initialBatteries = copy.deepcopy(self.grid.batteries)
+
         #self.bestGrid = self.grid
-        self.bestPrice = limitPrice
         
         #self.bestGrid = self.initialGrid
 
@@ -76,6 +79,9 @@ class RandomSwap():
 
             if improvedPrice < self.bestPrice:
                 self.bestPrice = improvedPrice
+                self.bestCables = copy.deepcopy(self.grid.cables)
+                self.grid.output("bestOut")
+
                 #houses, batteries, cables = self.grid.clone()
                 #self.bestGrid = Grid(self.grid.district)
                 #self.bestGrid.houses = houses
@@ -84,6 +90,8 @@ class RandomSwap():
                 
 
             if improvedPrice > limitPrice:
+                #self.grid.cables = copy.deepcopy(initialCables)
+                #self.grid.batteries = copy.deepcopy(initialBatteries)
                 self.grid = Grid(self.grid.district)
                 self.grid.addHouses()
                 self.grid.addBatteries()
@@ -91,11 +99,11 @@ class RandomSwap():
                 initial.runAlgorithm()
                 #print("succes")
 
-            # district 1: min objective: 53188
-            # district 2: min objective: 45268
-            # district 3: min objective: 42757
+
 
         return True
      
 
-    
+# district 1: min objective: 53188
+# district 2: min objective: 45268
+# district 3: min objective: 42757

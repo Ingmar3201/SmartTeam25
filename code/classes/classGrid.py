@@ -168,7 +168,7 @@ class Grid():
         return total
     
 
-    def output(self):
+    def output(self, name):
         """
 
         """
@@ -185,10 +185,11 @@ class Grid():
             batteryInfo = {"location":f"{battery.x},{battery.y}", "capacity":battery.capacity, "houses":housesInfo}
             output.append(batteryInfo)
         
-        now = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
-        filename = f"results/output_dist{self.district}_{now}.json"
+        #now = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
+        #name = f"results/output_dist{self.district}_{now}.json"
+        name = f"results/output_dist{self.district}_{name}.json"
 
-        with open(filename, 'w') as outfile:
+        with open(name, 'w') as outfile:
             json.dump(output, outfile, indent=3, sort_keys=True)
         
         return True

@@ -1,4 +1,3 @@
-from classHouse import House
 from classCable import Cable
 
 class Battery():

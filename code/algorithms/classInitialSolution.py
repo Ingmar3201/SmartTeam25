@@ -9,8 +9,9 @@ sys.path.append(os.path.join(directory, "code", "visualisation"))
 
 from bubblesort import bubblesort
 from bubblesortBattery import bubblesortBattery
+from classGrid import Grid
 
-class InitialSolution():
+class InitialSolution(Grid):
     def __init__(self, grid):
         self.grid = grid
         self.grid.houses = bubblesort(self.grid.houses)

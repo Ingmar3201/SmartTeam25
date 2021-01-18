@@ -13,10 +13,10 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "code", "algorithms"))
 
 
-from readBattery import readBattery
-from readHouse import readHouse
-from classCable import Cable 
-from objective import objective
+#from readBattery import readBattery
+#from readHouse import readHouse
+#from classCable import Cable 
+#from objective import objective
 
 
 def plot(grid):
