@@ -19,22 +19,21 @@ from classCable import Cable
 from objective import objective
 
 
-
-def plot(path_houses, path_batteries, cables_list, count):
+def plot(grid):
     '''
     Plots all houses batteries and cables and takes path to housedata batterydata and a list with cable objects
     '''
-    # get list with house objects and battery objects
-    batteries = readBattery(path_batteries)
-    houses = readHouse(path_houses)
+    # get district data
+    houses = grid.houses
+    batteries = grid.batteries
+    cables = grid.cablesList()
+    district = f"District: {grid.district}"
+    totalCosts = f"Total cost: {grid.totalCost()}"
 
     house_x = []
     house_y = []
     bat_x = []
     bat_y = []
-
-    # get total cost
-    total_costs = objective(cables_list, batteries)
 
     # gets data from house objects and battery objects
     for house in houses:
@@ -45,14 +44,15 @@ def plot(path_houses, path_batteries, cables_list, count):
         bat_x.append(int(battery.x))
         bat_y.append(int(battery.y))
     
+    # set plot attributes
     battery_size = 9
     house_size = 14
-    fig_size = 12
+    fig_size = 8
     cable_width = 2
 
     # plots single grid with seperate x and y cordslist for houses and batteries
     fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
-    fig.suptitle('District 1')
+    fig.suptitle(district)
 
     # plot house 
     ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = house_size)
@@ -61,7 +61,7 @@ def plot(path_houses, path_batteries, cables_list, count):
     ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = battery_size)
     
     # plot cables and use diffrent colour for each battery
-    for cable in cables_list:
+    for cable in cables:
         x = cable.x
         y = cable.y
 
@@ -90,9 +90,9 @@ def plot(path_houses, path_batteries, cables_list, count):
     # show visualisaton
     plt.grid(b=True, which='major', color='black', linestyle='-')
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
-    plt.title(total_costs)
-    plt.suptitle(count)
-    plt.savefig('plotje.png')
+    plt.title(totalCosts)
+    plt.suptitle(district)
+    plt.savefig('plots/district.png')
     # plt.show()
    
     

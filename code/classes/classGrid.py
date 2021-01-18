@@ -5,6 +5,7 @@ import datetime
 from classBattery import Battery
 from classHouse import House
 from classCable import Cable
+from vis import plot
 
 class Grid():
     def __init__(self, district):
@@ -44,10 +45,13 @@ class Grid():
             reader = csv.reader(file)
             next(reader, None)
             
+            id = 0
             for row in reader:
                 battery = Battery(row[0], row[1])
                 battery.extractCoordinates()
+                battery.id = id
                 self.batteries.append(battery)
+                id += 1
 
         return True
 
@@ -85,7 +89,7 @@ class Grid():
         return house in self.cables
 
     def makePlot(self):
-        pass
+        plot(self)
 
     def housesPerBattery(self, battery):
         """
