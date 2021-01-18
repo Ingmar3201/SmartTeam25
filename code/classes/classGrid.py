@@ -97,6 +97,25 @@ class Grid():
         return house in self.cables
 
 
+    def swap(self, house0, house1):
+        if house0 in self.cables and house1 in self.cables:
+            battery0 = self.cables[house0].battery
+            battery1 = self.cables[house1].battery
+
+            if battery0.totalOutput - house0.output + house1.output > battery0.capacity:
+                return False
+
+            if battery1.totalOutput - house1.output + house0.output > battery1.capacity:
+                return False
+            
+            self.removeConnection(house0)
+            self.removeConnection(house1)
+            self.makeConnection(house1, battery0)
+            self.makeConnection(house0, battery1)
+
+            return True
+    
+
     def makePlot(self):
         plot(self)
 

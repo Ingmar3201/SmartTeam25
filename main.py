@@ -15,7 +15,7 @@ from classInitialSolution import InitialSolution
 from classRandomSwap import RandomSwap
 
 district = 1
-runtime = 60 * 0.01
+runtime = 60 * 0.05
 
 grid = Grid(district)
 grid.addHouses()
@@ -23,7 +23,6 @@ grid.addBatteries()
 
 initial = InitialSolution(grid)
 initial.runAlgorithm()
-
 
 startPrice = grid.totalCost()
 
@@ -33,6 +32,19 @@ for battery in grid.batteries:
 print(f"initial price: {startPrice}")
 print(f"total cables {len(grid.cables)}")
 print("___________________________")
+
+randomSwap = RandomSwap(grid)
+bestPrice = randomSwap.runAlgorithm(runtime)
+
+#for house in bestGrid.houses:
+ #   print(house)
+
+print(f"best grid total cost: {bestPrice}")
+
+#count = 0
+#for house in grid.houses:
+ #   count += 1
+  #  print(count, grid.cables[house])
 
 
 #reps, bestPrice, bestGrid = randomSwap2(runtime, grid)
