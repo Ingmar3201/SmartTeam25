@@ -24,7 +24,7 @@ from initialSolution2 import initialSolution2
 from randomSwap2 import randomSwap2
 
 district = 1
-runtime = 60 * 1
+runtime = 60 * 0.01
 
 grid = initialSolution2(district)
 
