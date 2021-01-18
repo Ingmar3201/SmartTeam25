@@ -1,6 +1,7 @@
 import csv
 import json
 import datetime
+import copy
 
 from classBattery import Battery
 from classHouse import House
@@ -15,6 +16,7 @@ class Grid():
         self.houses = []
         self.cables = {}
     
+
     def addHouses(self):
         """
         Reads data from csv file and creates house class per line
@@ -32,6 +34,7 @@ class Grid():
                 self.houses.append(house)
 
         return True
+
 
     def addBatteries(self):
         """
@@ -55,6 +58,7 @@ class Grid():
 
         return True
 
+
     def makeConnection(self, house, battery):
         """
         Adds a cable object to the cables dictionairy
@@ -63,11 +67,14 @@ class Grid():
         # restrict houses to single connection
         if house in self.cables:
             return False
+        elif battery.totalOutput + house.output <= battery.capacity:
+            return False
         
         cable = Cable(house, battery)
         self.cables[house] = cable
         battery.totalOutput += house.output
         return True
+
 
     def removeConnection(self, house):
         """
@@ -82,14 +89,17 @@ class Grid():
         
         return False
 
+
     def hasConnection(self, house):
         """
         Checks if the house has a connection
         """
         return house in self.cables
 
+
     def makePlot(self):
         plot(self)
+
 
     def housesPerBattery(self, battery):
         """
@@ -106,6 +116,7 @@ class Grid():
         
         return False
 
+
     def cablesList(self):
         """
         Makes a list of all the cable objects in the cables dictionairy
@@ -116,6 +127,7 @@ class Grid():
         
         return cablesList
 
+
     def totalCost(self):
         """
         Calculates the total cost the the battery - cable configuration of this grid
@@ -124,8 +136,11 @@ class Grid():
         batteryCost = 5000
         cableSum = 0
         for house in self.houses:
-            cable = self.cables[house]
-            cableSum += cable.calcLength()
+            if house in self.cables:
+                cable = self.cables[house]
+                cableSum += cable.calcLength()
+            else:
+                return "unassigned house"
 
         batterySum = len(self.batteries)
 
@@ -133,6 +148,7 @@ class Grid():
         
         return total
     
+
     def output(self):
         """
 
@@ -158,3 +174,10 @@ class Grid():
         
         return True
         #return json.dumps(output, indent=3, sort_keys=True)
+    
+    def clone(self):
+        houses = copy.deepcopy(self.houses)
+        batteries = copy.deepcopy(self.batteries)
+        cables = copy.deepcopy(self.cables)
+
+        return houses, batteries, cables

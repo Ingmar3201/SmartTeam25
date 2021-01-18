@@ -12,6 +12,7 @@ sys.path.append(os.path.join(directory, "code", "visualisation"))
 
 from classBattery import Battery
 from classHouse import House
+from classGrid import Grid
 from readBattery import readBattery
 from readHouse import readHouse
 from vis import plot
@@ -21,17 +22,28 @@ from bubblesortBattery import bubblesortBattery
 from classObjective import Objective
 from initialSolution2 import initialSolution2
 
-class randomSwap(initialGrid):
+class RandomSwap():
 
-    def __init__(self, district, initialGrid):
-        self.grid = initialGrid
-        self.initialSolution = initialGrid
-        
+    def __init__(self, grid):
+        self.grid = grid
+        houses, batteries, cables = self.grid.clone()
+        self.initialGrid = Grid(self.grid.district)
+        self.initialGrid.houses = houses
+        self.initialGrid.batteries = batteries
+        self.initialGrid.cables = cables
+
+    def runAlgorithm(self, runtime):
+        self.randomSwap(runtime)
+
+        return self.bestGrid
+
+
     def randomSwap(self, runtime):
-        bestPrice = self.grid.totalCost()
-        limitPrice = bestPrice * 1.2
+        self.bestPrice = self.grid.totalCost()
+        limitPrice = self.bestPrice * 1.2
         reps = 0
-        bestGrid = self.grid
+        
+        self.bestGrid = self.initialGrid
 
         endTime = time.time() + runtime
         prevMinute = 0.0
@@ -62,18 +74,23 @@ class randomSwap(initialGrid):
 
             improvedPrice = self.grid.totalCost()
 
-            if improvedPrice < bestPrice:
-                bestPrice = improvedPrice
-                bestGrid = copy.deepcopy(self.grid)
+            if improvedPrice < self.bestPrice:
+                self.bestPrice = improvedPrice
+
+                houses, batteries, cables = self.grid.clone()
+                self.bestGrid = Grid(self.grid.district)
+                self.bestGrid.houses = houses
+                self.bestGrid.batteries = batteries
+                self.bestGrid.cables = cables
 
             if improvedPrice > limitPrice:
-                self.grid = self.initialSolution
+                self.grid = self.initialGrid
 
             # district 1: min objective: 53188
             # district 2: min objective: 45268
             # district 3: min objective: 42757
 
-        return reps, bestPrice, bestGrid
+        return True
      
 
     

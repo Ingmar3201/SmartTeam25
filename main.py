@@ -10,23 +10,20 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "code", "algorithms"))
 sys.path.append(os.path.join(directory, "code", "visualisation"))
 
-from classBattery import Battery
-from classHouse import House
 from classGrid import Grid
-from readBattery import readBattery
-from readHouse import readHouse
-from vis import plot
-from classCable import Cable
-from bubblesort import bubblesort
-from bubblesortBattery import bubblesortBattery
-from classObjective import Objective
-from initialSolution2 import initialSolution2
-from randomSwap2 import randomSwap2
+from classInitialSolution import InitialSolution
+from classRandomSwap import RandomSwap
 
 district = 1
 runtime = 60 * 0.01
 
-grid = initialSolution2(district)
+grid = Grid(district)
+grid.addHouses()
+grid.addBatteries()
+
+initial = InitialSolution(grid)
+initial.runAlgorithm()
+
 
 startPrice = grid.totalCost()
 
@@ -49,8 +46,8 @@ print("___________________________")
 
 print("___________________________")
 
-grid.output()
-grid.makePlot()
+#grid.output()
+#grid.makePlot()
 
 
 
