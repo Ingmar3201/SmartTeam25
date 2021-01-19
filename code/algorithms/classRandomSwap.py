@@ -23,83 +23,57 @@ from bubblesortBattery import bubblesortBattery
 from classInitialSolution import InitialSolution
 
 
-class RandomSwap():
-
-    def __init__(self, grid):
-        self.grid = grid
-        #houses, batteries, cables = self.grid.clone()
-        #self.initialGrid = Grid(self.grid.district)
-        #self.initialGrid.houses = houses
-        #self.initialGrid.batteries = batteries
-        #self.initialGrid.cables = cables
+class RandomSwap(InitialSolution):
 
 
-    def runAlgorithm(self, runtime):
-        self.randomSwap(runtime)
-
-        return self.bestCables
-
-
-    def randomSwap(self, runtime):
-        self.bestPrice = self.grid.totalCost()
-        limitPrice = self.bestPrice * 1.2
-        reps = 0
-        self.bestCables = copy.deepcopy(self.grid.cables)
-        #initialCables = copy.deepcopy(self.grid.cables)
-        #initialBatteries = copy.deepcopy(self.grid.batteries)
-
-        #self.bestGrid = self.grid
+    def runRandomSwap(self, runtime):
         
-        #self.bestGrid = self.initialGrid
+        self.runInitialSolution()
+
+        self.bestPrice = self.totalCost()
+        self.limitPrice = self.bestPrice * 1.2
+        self.bestCables = copy.deepcopy(self.cables)
+        self.bestBatteries = copy.deepcopy(self.batteries)
 
         endTime = time.time() + runtime
         prevMinute = 0.0
+        reps = 0
 
         while time.time() < endTime:
             reps += 1
-            #print(reps)
-        
+
             currentMinute = round((endTime - time.time())/60,1)
             if currentMinute != prevMinute:
                 prevMinute = currentMinute
-                print(f"remaining minutes: {prevMinute}")
+                print(f"remaining minutes: {prevMinute}, repeats: {reps}")
 
-            random.shuffle(self.grid.houses)
-            house0 = self.grid.houses[0]
-            house1 = self.grid.houses[1]
-            self.grid.swap(house0, house1)
-            
-            #count = 0
-            #for house in self.grid.houses:
-             #   count += 1
-                #print(house.output, count)
-                #print(count, self.grid.cables[house])
-            
-            improvedPrice = self.grid.totalCost()
+            self.randomSwap()
+        
+        print(f"done! repeats: {reps}")
 
-            if improvedPrice < self.bestPrice:
-                self.bestPrice = improvedPrice
-                self.bestCables = copy.deepcopy(self.grid.cables)
-                self.grid.output("bestOut")
-
-                #houses, batteries, cables = self.grid.clone()
-                #self.bestGrid = Grid(self.grid.district)
-                #self.bestGrid.houses = houses
-                #self.bestGrid.batteries = batteries
-                #self.bestGrid.cables = cables
-                
-
-            if improvedPrice > limitPrice:
-                #self.grid.cables = copy.deepcopy(initialCables)
-                #self.grid.batteries = copy.deepcopy(initialBatteries)
-                self.grid = Grid(self.grid.district)
-                self.grid.addHouses()
-                self.grid.addBatteries()
-                initial = InitialSolution(self.grid)
-                initial.runAlgorithm()
-                #print("succes")
+        return self.bestCables, self.bestBatteries
 
 
+    def randomSwap(self):   
+
+        random.shuffle(self.houses)
+        house0 = self.houses[0]
+        house1 = self.houses[1]
+        self.swap(house0, house1)
+        
+        improvedPrice = self.totalCost()
+
+        if improvedPrice < self.bestPrice:
+            self.bestPrice = improvedPrice
+            self.bestCables = copy.deepcopy(self.cables)
+            self.bestBatteries = copy.deepcopy(self.batteries)
+            self.output("bestOut")            
+
+        if improvedPrice > self.limitPrice:
+            self.batteries.clear()
+            self.cables.clear()
+            self.addBatteries()
+            self.runInitialSolution()
 
         return True
      

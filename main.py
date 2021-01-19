@@ -1,6 +1,7 @@
 import os, sys
 import random
 import time
+import copy
 import matplotlib.pyplot as plt
 
 directory = os.path.dirname(os.path.realpath(__file__))
@@ -13,40 +14,20 @@ from classGrid import Grid
 from classInitialSolution import InitialSolution
 from classRandomSwap import RandomSwap
 
-district = 1
-runtime = 60 * 1
+runtime = 60 * 0.05
 
-grid = Grid(district)
+"""
+grid = RandomSwap(1)
 grid.addHouses()
 grid.addBatteries()
+bestCables, bestBatteries = grid.runRandomSwap(runtime)
+"""
 
-initial = InitialSolution(grid)
-initial.runAlgorithm()
+for district in range(1,4):
+    grid = 0
+    grid = RandomSwap(int(district))
+    grid.addHouses()
+    grid.addBatteries()
+    bestCables, bestBatteries = grid.runRandomSwap(runtime)
 
-startPrice = grid.totalCost()
-
-for battery in grid.batteries:
-    print(battery.remainingCapacity())
-
-print(f"initial price: {startPrice}")
-print(f"total cables {len(grid.cables)}")
-print("___________________________")
-
-randomSwap = RandomSwap(grid)
-bestCables = randomSwap.runAlgorithm(runtime)
-
-print("___________________________")
-print(len(bestCables))
-print(len(grid.cables))
-print("___________________________")
-
-#for house in grid.houses:
-    #print(f"grid cables: {grid.cables[house].battery}")
-    #print(f"best cables: {bestCables[house].battery}")
-    #print(grid.cables[house].battery == bestCables[house].battery)
-
-print("___________________________")
-
-#grid.output()
-#grid.makePlot()
-
+#print(f"last: {grid.totalCost()}")

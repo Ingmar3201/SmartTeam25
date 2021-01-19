@@ -12,50 +12,88 @@ from bubblesortBattery import bubblesortBattery
 from classGrid import Grid
 
 class InitialSolution(Grid):
-    def __init__(self, grid):
-        self.grid = grid
-        self.grid.houses = bubblesort(self.grid.houses)
 
+    def runInitialSolution(self):
+        self.sortHouses()
 
-    def start(self):
-        self.freeHouses = []
-        for house in self.grid.houses:
-            self.grid.batteries = bubblesortBattery(self.grid.batteries, house)
+        self.startConnect()
 
-            for battery in self.grid.batteries:
-                if self.grid.makeConnection(house, battery):
-                    break
+        while len(self.cables) < 150:
+            self.connectLeftovers()
 
-            if not self.grid.hasConnection(house):
-                self.freeHouses.append(house)
+        return True
         
 
-    def connectAll(self):
-        for battery in self.grid.batteries:
-            housesInBattery = self.grid.housesPerBattery(battery)
+    def startConnect(self):
+        self.freeHouses = []
+
+        for house in self.houses:
+            
+            self.sortBatteries(house)
+
+            for battery in self.batteries:
+                if self.makeConnection(house, battery):
+                    break
+
+            if not self.hasConnection(house):
+                self.freeHouses.append(house)
+
+        return True
+        
+
+    def connectLeftovers(self):
+        for battery in self.batteries:
+            housesInBattery = self.housesPerBattery(battery)
             house = housesInBattery[-1]
-            if self.grid.removeConnection(house):
+            if self.removeConnection(house):
                 self.freeHouses.append(house)
 
         for i in range(200):
             random.shuffle(self.freeHouses)
             for house in self.freeHouses:
-                self.grid.batteries = bubblesortBattery(self.grid.batteries, house)
-                for battery in self.grid.batteries:
-                    if self.grid.makeConnection(house, battery):
+                self.sortBatteries(house)
+                for battery in self.batteries:
+                    if self.makeConnection(house, battery):
                         break
 
-            if len(self.grid.cables) < 150:
+            if len(self.cables) < 150:
                 for house in self.freeHouses:
-                    self.grid.removeConnection(house)
+                    self.removeConnection(house)
             else:
                 break
+        
+        return True
 
 
-    def runAlgorithm(self):
-        self.start()
+    def sortBatteries(self, house):
+        unsorted = self.batteries
+        sorted = []
 
-        while len(self.grid.cables) < 150:
-            self.connectAll()
+        for i in range(len(self.batteries)):
+            minBattery = self.batteries[0]
+            for j in range(len(unsorted)):
+                if self.batteries[j].calcLength(house) < minBattery.calcLength(house):
+                    minBattery = self.batteries[j]
+            sorted.append(minBattery)
+            unsorted.remove(minBattery)
+        
+        self.batteries = sorted
+
+        return True
+
+
+    def sortHouses(self):
+        unsorted = self.houses
+        sorted = []
+
+        for i in range(len(self.houses)):
+            maxHouse = self.houses[0]
+            for j in range(len(unsorted)):
+                if self.houses[j].output > maxHouse.output:
+                    maxHouse = self.houses[j]
+            sorted.append(maxHouse)
+            unsorted.remove(maxHouse)
+        
+        self.houses = sorted
 
         return True
