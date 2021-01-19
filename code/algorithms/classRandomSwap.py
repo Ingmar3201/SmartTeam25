@@ -12,13 +12,13 @@ sys.path.append(os.path.join(directory, "code", "visualisation"))
 
 #from classBattery import Battery
 #from classHouse import House
-from classGrid import Grid
+#from classGrid import Grid
 #from readBattery import readBattery
 #from readHouse import readHouse
 #from vis import plot
 #from classCable import Cable
-from bubblesort import bubblesort
-from bubblesortBattery import bubblesortBattery
+#from bubblesort import bubblesort
+#from bubblesortBattery import bubblesortBattery
 #from classObjective import Objective
 from classInitialSolution import InitialSolution
 
@@ -31,8 +31,7 @@ class RandomSwap(InitialSolution):
 
         self.bestPrice = self.totalCost()
         self.limitPrice = self.bestPrice * 1.2
-        self.bestCables = copy.deepcopy(self.cables)
-        self.bestBatteries = copy.deepcopy(self.batteries)
+        self.batteriesBest, self.cablesBest = self.clone()
 
         endTime = time.time() + runtime
         prevMinute = 0.0
@@ -48,15 +47,24 @@ class RandomSwap(InitialSolution):
 
             self.randomSwap()
         
-        print(f"done! repeats: {reps}")
-        print(f"last price: {self.totalCost()}")
+        print(f"DONE! repeats: {reps}")
+        #print(f"last price: {self.totalCost()}")
 
         self.replaceData(self.batteriesBest, self.cablesBest)
-        print(len(self.houses), len(self.batteries), len(self.cables))
+
+        batterySet = set()
+        for house in self.houses:
+            batterySet.add(self.cables[house].battery)
         
+        batteriesFromCables = list(batterySet)
+
         print(f"best price: {self.totalCost()}")
 
-        return self.bestCables, self.bestBatteries
+        for i in range(5):
+            print(self.batteries[i].remainingCapacity())
+            print(batteriesFromCables[i].remainingCapacity())
+
+        return True
 
 
     def randomSwap(self):
@@ -69,14 +77,9 @@ class RandomSwap(InitialSolution):
         improvedPrice = self.totalCost()
 
         if improvedPrice < self.bestPrice:
-            self.batteriesBest, self.cablesBest = self.clone()
-            #print(len(self.housesBest), len(self.batteriesBest), len(self.cablesBest))
-
-            print(f"better price: {self.totalCost()}")
-
             self.bestPrice = improvedPrice
-            self.bestCables = copy.deepcopy(self.cables)
-            self.bestBatteries = copy.deepcopy(self.batteries)
+            self.batteriesBest, self.cablesBest = self.clone()
+            print(f"better price: {self.totalCost()}")
             self.output("bestOut")            
 
         if improvedPrice > self.limitPrice:

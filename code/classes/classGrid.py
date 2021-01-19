@@ -200,11 +200,13 @@ class Grid():
     
     def clone(self):
         cablesList = self.cablesList()
+        cablesList = copy.deepcopy(cablesList)
         #houses = copy.deepcopy(self.houses)
         batteries = copy.deepcopy(self.batteries)
 
         return batteries, cablesList
     
+
     def replaceData(self, batteries, cablesList):
         self.houses.clear()
         self.batteries.clear()

@@ -17,17 +17,14 @@ from classRandomSwap import RandomSwap
 runtime = 60 * 0.1
 
 
-grid = RandomSwap(1)
-grid.loadData()
-bestCables, bestBatteries = grid.runRandomSwap(runtime)
-
-"""
-for district in range(1,4):
+for district in range(1,2):
+    
+    print(f"DISTRICT: {district}")
     grid = 0
     grid = RandomSwap(int(district))
     grid.addHouses()
     grid.addBatteries()
-    bestCables, bestBatteries = grid.runRandomSwap(runtime)
+    grid.runRandomSwap(runtime)
+    print("_________________________________________")
 
-"""
 #print(f"last: {grid.totalCost()}")
