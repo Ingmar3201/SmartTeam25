@@ -16,6 +16,9 @@ class Grid():
         self.houses = []
         self.cables = {}
     
+    def loadData(self):
+        self.addHouses()
+        self.addBatteries()
 
     def addHouses(self):
         """
@@ -196,8 +199,24 @@ class Grid():
         #return json.dumps(output, indent=3, sort_keys=True)
     
     def clone(self):
-        houses = copy.deepcopy(self.houses)
+        cablesList = self.cablesList()
+        #houses = copy.deepcopy(self.houses)
         batteries = copy.deepcopy(self.batteries)
-        cables = copy.deepcopy(self.cables)
 
-        return houses, batteries, cables
+        return batteries, cablesList
+    
+    def replaceData(self, batteries, cablesList):
+        self.houses.clear()
+        self.batteries.clear()
+        self.cables.clear()
+
+        for cable in cablesList:
+            house = cable.house
+            self.cables[house] = cable
+            self.houses.append(house)
+
+        #self.houses = houses
+        self.batteries = batteries
+        #self.cables = cables
+
+        return True

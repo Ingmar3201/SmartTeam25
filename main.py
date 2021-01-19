@@ -14,15 +14,14 @@ from classGrid import Grid
 from classInitialSolution import InitialSolution
 from classRandomSwap import RandomSwap
 
-runtime = 60 * 0.05
+runtime = 60 * 0.1
 
-"""
+
 grid = RandomSwap(1)
-grid.addHouses()
-grid.addBatteries()
+grid.loadData()
 bestCables, bestBatteries = grid.runRandomSwap(runtime)
-"""
 
+"""
 for district in range(1,4):
     grid = 0
     grid = RandomSwap(int(district))
@@ -30,4 +29,5 @@ for district in range(1,4):
     grid.addBatteries()
     bestCables, bestBatteries = grid.runRandomSwap(runtime)
 
+"""
 #print(f"last: {grid.totalCost()}")

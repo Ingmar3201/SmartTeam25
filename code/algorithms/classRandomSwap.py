@@ -25,10 +25,9 @@ from classInitialSolution import InitialSolution
 
 class RandomSwap(InitialSolution):
 
-
     def runRandomSwap(self, runtime):
-        
         self.runInitialSolution()
+        print(f"initial cost: {self.totalCost()}")
 
         self.bestPrice = self.totalCost()
         self.limitPrice = self.bestPrice * 1.2
@@ -50,11 +49,17 @@ class RandomSwap(InitialSolution):
             self.randomSwap()
         
         print(f"done! repeats: {reps}")
+        print(f"last price: {self.totalCost()}")
+
+        self.replaceData(self.batteriesBest, self.cablesBest)
+        print(len(self.houses), len(self.batteries), len(self.cables))
+        
+        print(f"best price: {self.totalCost()}")
 
         return self.bestCables, self.bestBatteries
 
 
-    def randomSwap(self):   
+    def randomSwap(self):
 
         random.shuffle(self.houses)
         house0 = self.houses[0]
@@ -64,6 +69,11 @@ class RandomSwap(InitialSolution):
         improvedPrice = self.totalCost()
 
         if improvedPrice < self.bestPrice:
+            self.batteriesBest, self.cablesBest = self.clone()
+            #print(len(self.housesBest), len(self.batteriesBest), len(self.cablesBest))
+
+            print(f"better price: {self.totalCost()}")
+
             self.bestPrice = improvedPrice
             self.bestCables = copy.deepcopy(self.cables)
             self.bestBatteries = copy.deepcopy(self.batteries)
