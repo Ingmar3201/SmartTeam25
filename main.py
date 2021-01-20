@@ -17,13 +17,15 @@ from classRandomSwap import RandomSwap
 runtime = 60 * 0.1
 
 
-for district in range(1,2):
+for district in range(1,4):
     
     print(f"DISTRICT: {district}")
     grid = 0
     grid = RandomSwap(int(district))
     grid.addHouses()
     grid.addBatteries()
+    #grid.runInitialSolution()
+    #grid.output("")
     grid.runRandomSwap(runtime)
     print("_________________________________________")
 

@@ -160,7 +160,8 @@ class Grid():
         for house in self.houses:
             if house in self.cables:
                 cable = self.cables[house]
-                cableSum += cable.calcLength()
+                cableSum += len(cable.x)
+                #cableSum += cable.calcLength()
             else:
                 return "unassigned house"
 
@@ -175,7 +176,7 @@ class Grid():
         """
 
         """
-        output = [{"district":self.district, "own-costs":self.totalCost()}]
+        output = [{"district":self.district, "costs-own":self.totalCost()}]
         for battery in self.batteries:
             housesInfo = []
             houses = self.housesPerBattery(battery)

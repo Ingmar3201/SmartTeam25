@@ -27,7 +27,6 @@ class Cable():
             self.x.append(xCurrent)
             self.y.append(yCurrent)
 
-
         """
         if self.house.x < self.battery.x:
             xLeft = self.house.x
