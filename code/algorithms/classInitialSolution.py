@@ -7,8 +7,8 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "code", "algorithms"))
 sys.path.append(os.path.join(directory, "code", "visualisation"))
 
-from bubblesort import bubblesort
-from bubblesortBattery import bubblesortBattery
+#from bubblesort import bubblesort
+#from bubblesortBattery import bubblesortBattery
 from classGrid import Grid
 
 class InitialSolution(Grid):

@@ -14,7 +14,7 @@ class Cable():
         
         for i in range(self.calcLength()):
             targetLength -= 1
-
+            
             if abs(xCurrent + 1 - self.battery.x) + abs(yCurrent - self.battery.y) == targetLength:
                 xCurrent += 1
             elif abs(xCurrent - 1 - self.battery.x) + abs(yCurrent - self.battery.y) == targetLength:
