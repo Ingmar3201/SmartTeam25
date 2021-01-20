@@ -28,41 +28,37 @@ class RandomSwap(InitialSolution):
     def runRandomSwap(self, runtime):
         self.runInitialSolution()
         print(f"initial cost: {self.totalCost()}")
-
+        
         self.bestPrice = self.totalCost()
-        self.limitPrice = self.bestPrice * 1.2
-        self.batteriesBest, self.cablesBest = self.clone()
+        self.limitPrice = self.bestPrice * 1.001
+        self.initialCables = self.clone()
+        self.cablesBest = self.initialCables
+        
+        cableSegmentList = self.cableSegmentList()
+        cableSegmentSet = set(cableSegmentList)
+        self.initialRepeatCableCount = len(cableSegmentList) - len(cableSegmentSet)
 
         endTime = time.time() + runtime
         prevMinute = 0.0
         reps = 0
 
         while time.time() < endTime:
-            reps += 1
-
+            
             currentMinute = round((endTime - time.time())/60,1)
             if currentMinute != prevMinute:
                 prevMinute = currentMinute
                 print(f"remaining minutes: {prevMinute}, repeats: {reps}")
 
             self.randomSwap()
-        
+            
+            reps += 1
+
         print(f"DONE! repeats: {reps}")
         #print(f"last price: {self.totalCost()}")
 
-        self.replaceData(self.batteriesBest, self.cablesBest)
-
-        batterySet = set()
-        for house in self.houses:
-            batterySet.add(self.cables[house].battery)
-        
-        batteriesFromCables = list(batterySet)
+        self.replaceData(self.cablesBest)
 
         print(f"best price: {self.totalCost()}")
-
-        for i in range(5):
-            print(self.batteries[i].remainingCapacity())
-            print(batteriesFromCables[i].remainingCapacity())
 
         return True
 
@@ -72,21 +68,31 @@ class RandomSwap(InitialSolution):
         random.shuffle(self.houses)
         house0 = self.houses[0]
         house1 = self.houses[1]
-        self.swap(house0, house1)
         
-        improvedPrice = self.totalCost()
+        if self.swap(house0, house1):
+        
+            currentPrice = self.totalCost()
 
-        if improvedPrice < self.bestPrice:
-            self.bestPrice = improvedPrice
-            self.batteriesBest, self.cablesBest = self.clone()
-            print(f"better price: {self.totalCost()}")
-            self.output("bestOut")            
+            cableSegmentList = self.cableSegmentList()
+            cableSegmentSet = set(cableSegmentList)
+            currentRepeatCableCount = len(cableSegmentList) - len(cableSegmentSet)
 
-        if improvedPrice > self.limitPrice:
-            self.batteries.clear()
-            self.cables.clear()
-            self.addBatteries()
-            self.runInitialSolution()
+            #print(currentPrice)
+
+            if currentPrice < self.bestPrice:
+                self.bestPrice = currentPrice
+                self.cablesBest = self.clone()
+                print(f"better price: {self.totalCost()}")
+                self.output("bestOut")
+
+            print(currentRepeatCableCount)
+
+            if currentPrice > self.limitPrice or currentRepeatCableCount < self.initialRepeatCableCount:
+                self.replaceData(self.initialCables)
+                #self.batteries.clear()
+                #self.cables.clear()
+                #self.addBatteries()
+                #self.runInitialSolution()
 
         return True
      

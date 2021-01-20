@@ -4,14 +4,15 @@ class Battery():
     """
     Defines the components of a battery object
     """
-    def __init__(self, position, capacity):
+    def __init__(self, position, capacity, id):
         self._position = position
         self.capacity = float(capacity)
-        self._housesDict = {}
-        self.housesList = []
-        self._totalOutput = 0
+        #self._housesDict = {}
+        #self.housesList = []
+        #self._totalOutput = 0
         self.totalOutput = 0.0
-        self.id = 0
+        self.id = id
+
 
     def extractCoordinates(self):
         """
@@ -34,11 +35,24 @@ class Battery():
 
         # an eqaution to make it possible to validate the coordinates
         return self.x >= 0 and self.y >= 0
-    
+
+
+    def remainingCapacity(self):
+        return self.capacity - self.totalOutput
+
+
+    def calcLength(self, house):
+        length = abs(house.x - self.x) + abs(house.y - self.y)
+        return length
+
+    #def checkHouse(self, house):
+    #    return self.totalOutput + house.output <= self.capacity
+
+    """
     def addHouse(self, house):
-        """
-        Links a house to the battery and adds the house output to the total output
-        """
+
+        #Links a house to the battery and adds the house output to the total output
+
         if house.connected:
             return False
             
@@ -60,20 +74,4 @@ class Battery():
             return cable
         
         return False
-    
-    def checkHouseOUD(self, house):
-        return self._totalOutput + house.output <= self.capacity
-    
-    def checkHouse(self, house):
-        return self.totalOutput + house.output <= self.capacity
-
-    def remainingCapacity(self):
-        return self.capacity - self.totalOutput
-
-    def remainingCapacityOUD(self):
-        return self.capacity - self._totalOutput
-
-    def calcLength(self, house):
-        length = abs(house.x - self.x) + abs(house.y - self.y)
-        return length
-
+    """

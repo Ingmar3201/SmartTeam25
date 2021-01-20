@@ -1,11 +1,13 @@
 class House:
-    def __init__(self, x, y, output):
+    def __init__(self, x, y, output, id):
         self.x = int(x)
         self.y = int(y)
         self.output = float(output)
-        self.connected = False
-        self.battery = False
+        #self.connected = False
+        #self.battery = False
+        self.id = id
     
+    """
     def addCable(self, cable):
         self.cable = cable
         return True
@@ -32,4 +34,6 @@ class House:
             return self.battery
         
         return False
+    
+    """
 

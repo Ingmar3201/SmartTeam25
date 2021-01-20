@@ -16,9 +16,11 @@ class Grid():
         self.houses = []
         self.cables = {}
     
+
     def loadData(self):
         self.addHouses()
         self.addBatteries()
+
 
     def addHouses(self):
         """
@@ -32,9 +34,11 @@ class Grid():
             reader = csv.reader(file)
             next(file, None)
 
+            id = 0
             for row in reader:
-                house = House(row[0], row[1], row[2])
+                house = House(row[0], row[1], row[2], id)
                 self.houses.append(house)
+                id += 1
 
         return True
 
@@ -53,9 +57,8 @@ class Grid():
             
             id = 0
             for row in reader:
-                battery = Battery(row[0], row[1])
+                battery = Battery(row[0], row[1], id)
                 battery.extractCoordinates()
-                battery.id = id
                 self.batteries.append(battery)
                 id += 1
 
@@ -117,6 +120,8 @@ class Grid():
             self.makeConnection(house0, battery1)
 
             return True
+            
+        return False
     
 
     def makePlot(self):
@@ -157,13 +162,11 @@ class Grid():
         segmentCost = 9
         batteryCost = 5000
         cableSum = 0
-        for house in self.houses:
-            if house in self.cables:
-                cable = self.cables[house]
-                cableSum += len(cable.x)
-                #cableSum += cable.calcLength()
-            else:
-                return "unassigned house"
+
+        locationsList = self.cableSegmentList()
+        locations = set(locationsList)
+        
+        cableSum = len(locations)
 
         batterySum = len(self.batteries)
 
@@ -176,7 +179,7 @@ class Grid():
         """
 
         """
-        output = [{"district":self.district, "costs-own":self.totalCost()}]
+        output = [{"district":self.district, "costs-shared":self.totalCost()}]
         for battery in self.batteries:
             housesInfo = []
             houses = self.housesPerBattery(battery)
@@ -199,27 +202,47 @@ class Grid():
         return True
         #return json.dumps(output, indent=3, sort_keys=True)
     
+
     def clone(self):
         cablesList = self.cablesList()
         cablesList = copy.deepcopy(cablesList)
         #houses = copy.deepcopy(self.houses)
-        batteries = copy.deepcopy(self.batteries)
+        #batteries = copy.deepcopy(self.batteries)
 
-        return batteries, cablesList
+        return cablesList
     
 
-    def replaceData(self, batteries, cablesList):
+    def replaceData(self, cablesList):
         self.houses.clear()
         self.batteries.clear()
         self.cables.clear()
 
-        for cable in cablesList:
+        cablesClone = copy.deepcopy(cablesList)
+
+        for cable in cablesClone:
             house = cable.house
+            battery = cable.battery
             self.cables[house] = cable
             self.houses.append(house)
-
+            if battery not in self.batteries:
+                self.batteries.append(battery)
+            
         #self.houses = houses
-        self.batteries = batteries
+        #self.batteries = batteries
         #self.cables = cables
 
         return True
+    
+
+    def cableSegmentList(self):
+        locationsList = []
+
+        for house in self.houses:
+            if house in self.cables:
+                cable = self.cables[house]
+                for location in cable.locations:
+                    locationsList.append(location)
+            else:
+                return "unassigned house"
+        
+        return locationsList

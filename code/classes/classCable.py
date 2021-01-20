@@ -26,31 +26,18 @@ class Cable():
 
             self.x.append(xCurrent)
             self.y.append(yCurrent)
-
-        """
-        if self.house.x < self.battery.x:
-            xLeft = self.house.x
-            xRight = self.battery.x + 1
-        else:
-            xLeft = self.battery.x
-            xRight = self.house.x + 1
-
-        for x in range(xLeft, xRight):
-            self.x.append(x)
         
-        """
-        #self.x = [house.x, battery.x, battery.x]
-        #self.y = [house.y, house.y, battery.y]
+        self.makeLocation()
+
 
     def calcLength(self):
         length = abs(self.house.x - self.battery.x) + abs(self.house.y - self.battery.y)
         return length
 
-"""
-    def createRoute(self):
-        start = (self.house.x, self.house.y)
-        corner = (self.battery.x , self.house.y)
-        end = (self.battery.x, self.battery.y)
-        self.route = [start, corner, end]
-        return self.route
- """
+    
+    def makeLocation(self):
+        self.locations = []
+        location = ""
+        for i in range(len(self.x)):
+            location = f"{self.x[i]},{self.y[i]}"
+            self.locations.append(location)
