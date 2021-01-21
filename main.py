@@ -21,27 +21,20 @@ runtime = 60 * 0.05
 now = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
 name = f"terminalOutput/terminal_{now}.txt"
 
-with open(name, 'w') as f:
-    sys.stdout = f
+#with open(name, 'w') as f:
+#    sys.stdout = f
 
-    for district in range(1,2):
-        
-        print(f"DISTRICT: {district}")
-        print("_________________________________________")
-        grid = 0
-        #grid = RandomSwap(int(district))
-        grid = Share(int(district))
+for district in range(2,3):
+    
+    print(f"DISTRICT: {district}")
+    print("_________________________________________")
+    #grid = 0
+    grid = Share(int(district))
+    grid.runShare()
+    #grid.makePlot()
 
-        grid.runShare()
+    print("_________________________________________")
 
-        #grid.runInitialSolution()
-        #grid.output("")
-        #grid.makePlot()
-        
-        #grid.runRandomSwap(runtime)
-        print("_________________________________________")
-
-    #print(f"last: {grid.totalCost()}")
 
 
 

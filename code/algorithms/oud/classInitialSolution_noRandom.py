@@ -24,12 +24,14 @@ class InitialSolution(Grid):
 
         self.startConnect()
 
-        while len(self.cables) < 150:
+        self.allConnected = False
+        #while len(self.cables) < 150:
+        while not self.allConnected:
             self.connectLeftovers()
 
         return True
         
-        
+
     def startConnect(self):
         self.freeHouses = []
 
@@ -48,25 +50,61 @@ class InitialSolution(Grid):
         
 
     def connectLeftovers(self):
-
+        baseRemainingBatteryCapacity = {}
         for battery in self.batteries:
             housesInBattery = self.housesPerBattery(battery)
             house = housesInBattery[-1]
+            
             if self.removeConnection(house):
                 self.freeHouses.append(house)
+            
+            baseRemainingBatteryCapacity[battery] = battery.remainingCapacity()
+            #print(remainingBatteryCapacity[battery])
 
-        for i in range(200):
-            random.shuffle(self.freeHouses)
+        #permutationsList = [(0, 1, 3, 4, 6, 7, 8, 10, 2, 5, 9)]
+        n = len(self.freeHouses)
+        
+        #perms = list(permutations(range(n), n))
+        #perms = [perms[0], perms[1]]
+
+        for attempt in permutations(range(n), n):
+        #for attempt in perms:
+            #currentRemainingBatteryCapacity= copy.deepcopy(baseRemainingBatteryCapacity)
+            #print(attempt)
+            currentRemainingBatteryCapacity = {}
+
+            for battery in self.batteries:
+                currentRemainingBatteryCapacity[battery] = baseRemainingBatteryCapacity[battery]
+
+            self.freeHouses = self.sortHouses(self.freeHouses)     
+            
+            temp = []
+            for j in attempt:
+                temp.append(self.freeHouses[j])
+            
+            self.freeHouses = temp
+            
+            amountToConnect = n
+
+            #random.shuffle(self.freeHouses)
             for house in self.freeHouses:
                 self.sortBatteries(house)
-                for battery in self.batteries:                        
-                    if self.makeConnection(house, battery):
+                for battery in self.batteries:
+                    if currentRemainingBatteryCapacity[battery] - house.output > 0:
+                        currentRemainingBatteryCapacity[battery] -= house.output
+                        amountToConnect -= 1
                         break
+                    #if self.makeConnection(house, battery):
             
-            if len(self.cables) < 150:
+            #if len(self.cables) < 150:
+            if amountToConnect == 0:
+                print(attempt)
+                self.allConnected = True
                 for house in self.freeHouses:
-                    self.removeConnection(house)
-            else:
+                    self.sortBatteries(house)
+                    for battery in self.batteries:
+                        if self.makeConnection(house, battery):
+                            break
                 break
         
         return True
