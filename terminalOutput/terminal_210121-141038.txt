@@ -1,0 +1,23 @@
+DISTRICT: 1
+initial cost: 38572
+rep: 0, new cost: 36403
+rep: 1, new cost: 35539
+rep: 2, new cost: 35152
+rep: 3, new cost: 34792
+rep: 4, new cost: 34612
+rep: 5, new cost: 34360
+rep: 6, new cost: 34297
+rep: 7, new cost: 34045
+rep: 8, new cost: 33901
+rep: 9, new cost: 33811
+rep: 10, new cost: 33739
+rep: 11, new cost: 33739
+rep: 12, new cost: 33739
+rep: 13, new cost: 33739
+rep: 14, new cost: 33739
+rep: 15, new cost: 33739
+rep: 16, new cost: 33739
+rep: 17, new cost: 33739
+rep: 18, new cost: 33739
+rep: 19, new cost: 33739
+_________________________________________

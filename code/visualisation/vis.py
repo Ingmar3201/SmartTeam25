@@ -65,22 +65,21 @@ def plot(grid):
         x = cable.x
         y = cable.y
 
-        if cable.battery.id == 4:
+        if cable.battery.id == 0:
             ax.plot(x, y, '-', color = 'orange', label = 'cable', linewidth = cable_width)
-        
-        """
+
         elif cable.battery.id == 1:
             ax.plot(x, y, '-', color = 'purple', label = 'cable', linewidth = cable_width)
         
         elif cable.battery.id == 2:
-            ax.plot(x, y, '-', color = 'yellow', label = 'cable', linewidth = cable_width)
+            ax.plot(x, y, '-', color = 'c', label = 'cable', linewidth = cable_width)
 
         elif cable.battery.id == 3:
             ax.plot(x, y, '-', color = 'green', label = 'cable', linewidth = cable_width)
 
         elif cable.battery.id == 4:
             ax.plot(x, y, '-', color = 'pink', label = 'cable', linewidth = cable_width)
-        """
+
 
     # plot grid
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))

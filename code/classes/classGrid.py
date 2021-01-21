@@ -11,7 +11,6 @@ from vis import plot
 class Grid():
     def __init__(self, district):
         self.district = district
-        #self._points = {}
         self.batteries = []
         self.houses = []
         self.cables = {}
@@ -120,7 +119,7 @@ class Grid():
             self.makeConnection(house0, battery1)
 
             return True
-            
+
         return False
     
 
