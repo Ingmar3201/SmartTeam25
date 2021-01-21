@@ -14,6 +14,9 @@ from classGrid import Grid
 class InitialSolution(Grid):
 
     def runInitialSolution(self):
+        self.cables = {}
+        self.loadData()
+
         self.sortHouses()
 
         self.startConnect()

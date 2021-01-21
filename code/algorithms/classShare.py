@@ -26,29 +26,55 @@ from classInitialSolution import InitialSolution
 class Share(InitialSolution):
     
     def runShare(self):
-        
-        self.verticalSteps = 10
-
         self.runInitialSolution()
+        lowestCost = self.totalCost()
+        bestVerticalSteps = 0
+        self.verticalSteps = 0
+        # the max amount of times a worse cost is accepted
+        maxDeteriorations = 3
+        deteriorations = 0
+
         print(f"initial cost: {self.totalCost()}")
-        self.makePlot()
-        time.sleep(3)
+        print(f"max Deteriorations: {maxDeteriorations}")
 
-        self.getHouseLocation()
-
-        print(f"vertical Steps: {self.verticalSteps}")
-        print("______________________")
-
-        count = 0
-        #for i in range():
-        prevCost = -1
-        while prevCost != self.totalCost():
-            prevCost = self.totalCost()
-            self.relayCables()
-            print(f"rep: {count}, new cost: {self.totalCost()}")
+        while deteriorations < maxDeteriorations:
+            # set the amount of steps a cable can search in the vertical direction
+            self.verticalSteps += 1
+            
+            # connects all houses with batteries
+            
+            self.runInitialSolution()
             self.makePlot()
-            count += 1
             time.sleep(1)
+
+            self.getHouseLocation()
+            print("______________________")
+            print(f"vertical Steps: {self.verticalSteps}")
+            print("______________________")
+
+            rep = 0
+            prevCost = -1
+            while prevCost != self.totalCost():
+                prevCost = self.totalCost()
+                self.relayCables()
+                print(f"rep: {rep}, new cost: {self.totalCost()}")
+                self.makePlot()
+                rep += 1
+                time.sleep(0.2)
+            
+            if self.totalCost() < lowestCost:
+                deteriorations = 0
+                lowestCost = self.totalCost()
+                bestVerticalSteps = self.verticalSteps
+            else:
+                deteriorations += 1
+            
+        
+
+        print("______________________________")
+        print(f"lowest Cost: {lowestCost}")
+        print(f"best Vertical Steps: {bestVerticalSteps}")
+        print("______________________________")
 
         return True
 

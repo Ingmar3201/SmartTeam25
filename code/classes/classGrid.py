@@ -14,7 +14,7 @@ class Grid():
         self.batteries = []
         self.houses = []
         self.cables = {}
-    
+        self.loadData()
 
     def loadData(self):
         self.addHouses()
