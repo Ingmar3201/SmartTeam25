@@ -27,7 +27,6 @@ def plot(grid, name):
     houses = grid.houses
     batteries = grid.batteries
     cables = grid.cablesList()
-    cablesDict = grid.cables
     district = f"District: {grid.district}"
     totalCosts = f"Total cost: {grid.totalCost()}"
 
@@ -37,17 +36,17 @@ def plot(grid, name):
     bat_y = []
 
     # gets data from house objects and battery objects
-    #for house in houses:
-    #    house_x.append(int(house.x))
-    #    house_y.append(int(house.y))
+    for house in houses:
+        house_x.append(int(house.x))
+        house_y.append(int(house.y))
 
-    #for battery in batteries:
-    #    bat_x.append(int(battery.x))
-    #    bat_y.append(int(battery.y))
+    for battery in batteries:
+        bat_x.append(int(battery.x))
+        bat_y.append(int(battery.y))
     
     # set plot attributes
     battery_size = 9
-    house_size = 8
+    house_size = 14
     fig_size = 8
     cable_width = 2
 
@@ -56,37 +55,30 @@ def plot(grid, name):
     fig.suptitle(district)
 
     # plot house 
-    #ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = house_size)
+    ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = house_size)
     
     # plot bat
-    #ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = battery_size)
+    ax.plot(bat_x, bat_y, 's', color = 'red', label = 'batteries', markersize = battery_size)
     
     # plot cables and use diffrent colour for each battery
-    
-    colors = ['orange', 'magenta', 'cyan', 'lime', 'red']
-    
     for cable in cables:
         x = cable.x
         y = cable.y
-        id = cable.battery.id
 
-        ax.plot(x, y, '-', color = colors[id], label = 'cable', linewidth = cable_width)
+        if cable.battery.id == 0:
+            ax.plot(x, y, '-', color = 'orange', label = 'cable', linewidth = cable_width)
 
-    for house in houses:
-        x = house.x
-        y = house.y
-        id = cablesDict[house].battery.id
+        elif cable.battery.id == 1:
+            ax.plot(x, y, '-', color = 'purple', label = 'cable', linewidth = cable_width)
+        
+        elif cable.battery.id == 2:
+            ax.plot(x, y, '-', color = 'c', label = 'cable', linewidth = cable_width)
 
-        ax.plot(x, y, 'p', color = colors[id], label = 'houses', markersize = house_size)
+        elif cable.battery.id == 3:
+            ax.plot(x, y, '-', color = 'green', label = 'cable', linewidth = cable_width)
 
-    for battery in batteries:
-        x = battery.x
-        y = battery.y
-        id = battery.id
-
-        ax.plot(x, y, 's', color = "black", label = 'batteries', markersize = battery_size)
-
-
+        elif cable.battery.id == 4:
+            ax.plot(x, y, '-', color = 'pink', label = 'cable', linewidth = cable_width)
 
 
     # plot grid
