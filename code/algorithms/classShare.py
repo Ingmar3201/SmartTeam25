@@ -28,25 +28,26 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 #sys.path.append(os.path.join(directory, "code", "algorithms"))
 #sys.path.append(os.path.join(directory, "code", "visualisation"))
 
-from classInitialSolution import InitialSolution
+
+from classDensity import Density
 
 
 
-class Share(InitialSolution):
+class Share(Density):
     
     def runShare(self):
         '''
         control flow of share algorithm
         '''
         # set initial parameters
-        self.runInitialSolution()
+        self.runDensity()
         self.initialCables = self.clone()
         lowestCost = self.totalCost()
         bestVerticalSteps = 0
         self.verticalSteps = 0
 
         # the max amount of times a worse cost is accepted
-        maxDeteriorations = 3
+        maxDeteriorations = 5
         deteriorations = 0
 
         self.makePlot(f"_initial")

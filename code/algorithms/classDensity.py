@@ -1,29 +1,41 @@
+#from itertools import permutations
+import time
+
 from classInitialSolution import InitialSolution
 
 class Density(InitialSolution):
     
     def runDensity(self):
         self.runInitialSolution()
-        self.makePlot("Initial")
         
-        # remove houses far from the main cluster of houses per battery
-        self.freeHouses = []
-        self.removeFarHouses()
-        # sorts the removed houses from largest output to smallest
-        self.freeHouses = self.sortHouses(self.freeHouses)
+        for i in range(50):
+            print(i)
+            self.limitModifier = 0.8 + i * 0.01
+            # remove houses far from the main cluster of houses per battery
+            self.freeHouses = []
+            self.removeFarHouses()
+            
+            #print(len(self.cables))
+            #print(len(self.freeHouses))
 
-        # calculate the center point of the 5 house clusters
-        self.clusterPoints = []
-        self.getClusterPoints()
+            # sorts the removed houses from largest output to smallest
+            self.freeHouses = self.sortHouses(self.freeHouses)
 
-        self.assignToCluster()
+            # calculate the center point of the 5 house clusters
+            self.clusterPoints = []
+            self.getClusterPoints()
 
-        # prints
-        for point in self.clusterPoints:
-            #print(point)
-            pass
-        
-        #print(len(self.cables))
+            self.assignToCluster()
+
+            #print()
+            #print(len(self.cables))
+            #print(len(self.freeHouses))
+            #print("____________")
+
+            while len(self.cables) < 150:
+                self.connectLeftovers()
+
+            #self.makePlot("test")
 
 
     def removeFarHouses(self):
@@ -40,7 +52,7 @@ class Density(InitialSolution):
             avarageTotalLength = int(avarageTotalLength/len(houses))
             
             for houseInfo in housesLengthList:
-                if houseInfo[1] > avarageTotalLength:
+                if houseInfo[1] > avarageTotalLength * self.limitModifier:
                     if self.removeConnection(houseInfo[0]):
                         self.freeHouses.append(houseInfo[0])
             
@@ -65,11 +77,19 @@ class Density(InitialSolution):
 
     def assignToCluster(self):
         for house in self.freeHouses:
+            
             self.sortClusterPoints(house)
-            print(f"house loc {house.x}, {house.y}")
-            print(f"point loc {self.clusterPoints[0][1]}, {self.clusterPoints[0][2]}")
-            print()
-            #for point in self.clusterPoints:
+            
+            for cluster in self.clusterPoints:
+                if self.makeConnection(house, cluster[0]):
+                    break
+
+        for house in self.houses:
+            if self.hasConnection(house) and house in self.freeHouses:
+                self.freeHouses.remove(house)
+            
+
+                #for point in self.clusterPoints:
                 #distance = abs(house.x - targetHouse.x) + abs(house.y - targetHouse.y)
 
    

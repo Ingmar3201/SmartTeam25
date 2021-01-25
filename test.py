@@ -1,12 +1,18 @@
 from itertools import permutations
 from itertools import combinations
+import time
 
 
-n = 11
-target = (0, 1, 3, 4, 6, 7, 8, 10, 2, 5, 9)
+n = 60
+
+startTime = time.time()
+print(startTime)
 
 for i in permutations(range(n), n):
-    if i == target:
-        print(i)
-        break
+    pass
+    #print(time.time() - startTime,i)
+
+print(time.time() - startTime)
+
+
 

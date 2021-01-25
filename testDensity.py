@@ -25,8 +25,10 @@ for district in range(1,2):
     
     print(f"DISTRICT: {district}")
     print("_________________________________________")
-    grid = Density(int(district))
-    grid.runDensity()
+    grid = Share(int(district))
+    grid.runShare()
+    #grid = Density(int(district))
+    #grid.runDensity()
     print("_________________________________________")
 
 
