@@ -27,12 +27,16 @@ class Share(InitialSolution):
     
     def runShare(self):
         self.runInitialSolution()
+        self.initialCables = self.clone()
         lowestCost = self.totalCost()
         bestVerticalSteps = 0
         self.verticalSteps = 0
+
         # the max amount of times a worse cost is accepted
         maxDeteriorations = 3
         deteriorations = 0
+
+        self.makePlot(f"_initial")
 
         print(f"initial cost: {self.totalCost()}")
         print(f"max Deteriorations: {maxDeteriorations}")
@@ -43,9 +47,9 @@ class Share(InitialSolution):
             
             # connects all houses with batteries
 
-            self.runInitialSolution()
-            if self.verticalSteps > 2 and self.verticalSteps < 5:
-                self.makePlot(f"vSteps{self.verticalSteps}_initial")
+            #self.runInitialSolution()
+            self.replaceData(self.initialCables)
+            #self.makePlot(f"vSteps{self.verticalSteps}_initial")
             #time.sleep(1)
 
             self.getHouseLocation()
@@ -59,8 +63,7 @@ class Share(InitialSolution):
                 prevCost = self.totalCost()
                 self.relayCables()
                 print(f"rep: {rep}, new cost: {self.totalCost()}")
-                if self.verticalSteps > 2 and self.verticalSteps < 5:
-                    self.makePlot(f"vSteps{self.verticalSteps}_rep{rep}")
+                self.makePlot(f"vSteps{self.verticalSteps}")
                 rep += 1
                 #time.sleep(0.2)
             
