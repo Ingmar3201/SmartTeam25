@@ -1,8 +1,26 @@
+'''
+Algorithm to enable cablesharing between houses
+'''
+
+'''
+PLEUDO CODE
+per batterij alle kabels af gaan
+    voor een kabel: # zoek vanaf huis tot batterij 
+        punt voor punt, naar bijliggende kabels in de y richting
+            wordt er iets gevonden
+                check of: 
+                    het een huis is, 
+                    of het bij dezelfde batterij hoort
+                    en of de huis niet al is gebruikt
+                neem alle kabel punten over
+                stop als de kabel in de y richting gaat
+'''
+
+
 import os, sys
 import matplotlib.pyplot as plt
 import random
 import time
-
 
 directory = os.path.dirname(os.path.realpath(__file__))
 #sys.path.append(os.path.join(directory, "code"))
@@ -12,20 +30,15 @@ sys.path.append(os.path.join(directory, "code", "classes"))
 
 from classInitialSolution import InitialSolution
 
-# per batterij alle kabels af gaan
-    # voor een kabel: # zoek vanaf huis tot batterij 
-        # punt voor punt, naar bijliggende kabels in de y richting
-            # wordt er iets gevonden
-                # check of: 
-                    # het een huis is, 
-                    # of het bij dezelfde batterij hoort
-                    # en of de huis niet al is gebruikt
-                # neem alle kabel punten over
-                # stop als de kabel in de y richting gaat
+
 
 class Share(InitialSolution):
     
     def runShare(self):
+        '''
+        control flow of share algorithm
+        '''
+        # set initial parameters
         self.runInitialSolution()
         self.initialCables = self.clone()
         lowestCost = self.totalCost()
@@ -37,16 +50,14 @@ class Share(InitialSolution):
         deteriorations = 0
 
         self.makePlot(f"_initial")
-
         print(f"initial cost: {self.totalCost()}")
         print(f"max Deteriorations: {maxDeteriorations}")
 
+        # every iteration scan one step further for houses
         while deteriorations < maxDeteriorations:
-            # set the amount of steps a cable can search in the vertical direction
             self.verticalSteps += 1
             
-            # connects all houses with batteries
-
+            # use initial solution copy to save time 
             #self.runInitialSolution()
             self.replaceData(self.initialCables)
             #self.makePlot(f"vSteps{self.verticalSteps}_initial")
@@ -57,6 +68,8 @@ class Share(InitialSolution):
             print(f"vertical Steps: {self.verticalSteps}")
             print("______________________")
 
+
+            # keep relaying cables for as long as it yields a diffrent result 
             rep = 0
             prevCost = -1
             while prevCost != self.totalCost():
@@ -84,6 +97,8 @@ class Share(InitialSolution):
 
 
     def relayCables(self):
+        '''
+        '''
         for battery in self.batteries:
             houses = self.housesPerBattery(battery)
             blacklistHouses = []
@@ -135,6 +150,8 @@ class Share(InitialSolution):
 
 
     def segmentCopy(self, originHouse, waypointHouse, sidetrackPoint):
+        '''
+        '''
         newX = []
         newY = []
 
@@ -181,6 +198,8 @@ class Share(InitialSolution):
         
     
     def sortHouseDistance(self, houses):
+        '''
+        '''
         unsorted = houses
         sorted = []
 
