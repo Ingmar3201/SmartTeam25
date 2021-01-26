@@ -206,8 +206,6 @@ class Grid():
     def clone(self):
         cablesList = self.cablesList()
         cablesList = copy.deepcopy(cablesList)
-        #houses = copy.deepcopy(self.houses)
-        #batteries = copy.deepcopy(self.batteries)
 
         return cablesList
     
@@ -226,10 +224,6 @@ class Grid():
             self.houses.append(house)
             if battery not in self.batteries:
                 self.batteries.append(battery)
-            
-        #self.houses = houses
-        #self.batteries = batteries
-        #self.cables = cables
 
         return True
     

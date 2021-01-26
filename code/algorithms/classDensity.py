@@ -7,16 +7,22 @@ class Density(InitialSolution):
     
     def runDensity(self):
         self.runInitialSolution()
+
+        bestSolution = self.clone()
+        bestLength = 9 * 10 ** 7
+
+        self.currentSumLength = 0
+
+        for i in range(30):
         
-        for i in range(50):
-            print(i)
-            self.limitModifier = 0.8 + i * 0.01
+            self.currentSumLength = 0
+            self.limitModifier = 1 + i * 0.003
+            
             # remove houses far from the main cluster of houses per battery
             self.freeHouses = []
             self.removeFarHouses()
-            
-            #print(len(self.cables))
-            #print(len(self.freeHouses))
+
+            #print(i, round(self.limitModifier, 4), self.currentSumLength)
 
             # sorts the removed houses from largest output to smallest
             self.freeHouses = self.sortHouses(self.freeHouses)
@@ -27,18 +33,22 @@ class Density(InitialSolution):
 
             self.assignToCluster()
 
-            #print()
-            #print(len(self.cables))
-            #print(len(self.freeHouses))
-            #print("____________")
-
             while len(self.cables) < 150:
                 self.connectLeftovers()
+            
+            if self.currentSumLength < bestLength:
+                bestLength = self.currentSumLength
+                bestSolution = self.clone()
 
-            #self.makePlot("test")
+            #self.makePlot("test1")
+
+        self.replaceData(bestSolution)
+
+        #self.makePlot("test2")
 
 
     def removeFarHouses(self):
+        tempHouses = []
         for battery in self.batteries:
             housesLengthList = []
             avarageTotalLength = 0
@@ -49,13 +59,19 @@ class Density(InitialSolution):
                 housesLengthList.append(houseInfo)
                 avarageTotalLength += length
             
+            self.currentSumLength += avarageTotalLength
             avarageTotalLength = int(avarageTotalLength/len(houses))
             
+            housesLengthList = sorted(housesLengthList, key=lambda houseInfo: houseInfo[1])
+
             for houseInfo in housesLengthList:
+                tempHouses.append(houseInfo[0])
                 if houseInfo[1] > avarageTotalLength * self.limitModifier:
                     if self.removeConnection(houseInfo[0]):
                         self.freeHouses.append(houseInfo[0])
-            
+        
+        self.houses = tempHouses
+
         return True
 
 
@@ -125,7 +141,6 @@ class Density(InitialSolution):
         self.clusterPoints = sorted
 
         return True
-    
 
 
 

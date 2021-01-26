@@ -21,14 +21,14 @@ from classDensity import Density
 
 
 
-for district in range(1,2):
+for district in range(1,4):
     
     print(f"DISTRICT: {district}")
     print("_________________________________________")
-    grid = Share(int(district))
-    grid.runShare()
-    #grid = Density(int(district))
-    #grid.runDensity()
+    #grid = Share(int(district))
+    #grid.runShare()
+    grid = Density(int(district))
+    grid.runDensity()
     print("_________________________________________")
 
 

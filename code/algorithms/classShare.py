@@ -43,6 +43,7 @@ class Share(Density):
         self.runDensity()
         self.initialCables = self.clone()
         lowestCost = self.totalCost()
+        bestSolution = self.clone()
         bestVerticalSteps = 0
         self.verticalSteps = 0
 
@@ -50,24 +51,23 @@ class Share(Density):
         maxDeteriorations = 5
         deteriorations = 0
 
-        self.makePlot(f"_initial")
-        print(f"initial cost: {self.totalCost()}")
-        print(f"max Deteriorations: {maxDeteriorations}")
+        #self.makePlot(f"_initial")
+        #print(f"initial cost: {self.totalCost()}")
+        #print(f"max Deteriorations: {maxDeteriorations}")
 
         # every iteration scan one step further for houses
         while deteriorations < maxDeteriorations:
             self.verticalSteps += 1
             
             # use initial solution copy to save time 
-            #self.runInitialSolution()
             self.replaceData(self.initialCables)
             #self.makePlot(f"vSteps{self.verticalSteps}_initial")
             #time.sleep(1)
 
             self.getHouseLocation()
-            print("______________________")
-            print(f"vertical Steps: {self.verticalSteps}")
-            print("______________________")
+            #print("______________________")
+            #print(f"vertical Steps: {self.verticalSteps}")
+            #print("______________________")
 
 
             # keep relaying cables for as long as it yields a diffrent result 
@@ -76,8 +76,8 @@ class Share(Density):
             while prevCost != self.totalCost():
                 prevCost = self.totalCost()
                 self.relayCables()
-                print(f"rep: {rep}, new cost: {self.totalCost()}")
-                self.makePlot(f"vSteps{self.verticalSteps}")
+                #print(f"rep: {rep}, new cost: {self.totalCost()}")
+                #self.makePlot(f"vSteps{self.verticalSteps}")
                 rep += 1
                 #time.sleep(0.2)
             
@@ -85,14 +85,18 @@ class Share(Density):
                 deteriorations = 0
                 lowestCost = self.totalCost()
                 bestVerticalSteps = self.verticalSteps
+                bestSolution = self.clone()
             else:
                 deteriorations += 1
             
         
-        print("______________________________")
-        print(f"lowest Cost: {lowestCost}")
-        print(f"best Vertical Steps: {bestVerticalSteps}")
-        print("______________________________")
+        self.replaceData(bestSolution)
+        #self.makePlot("BestSolution")
+
+        #print("______________________________")
+        #print(f"lowest Cost: {lowestCost}")
+        #print(f"best Vertical Steps: {bestVerticalSteps}")
+        #print("______________________________")
 
         return True
 
