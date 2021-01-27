@@ -22,12 +22,12 @@ Specificaties:
 
 ### Structuur
 
-Alle Python scripts staan in de folder code. Deze is verder opgedeeld in
+Alle Python scripts staan in de map 'code'. Deze is verder opgedeeld in
 - Algorithms: classes met algoritmes
 - Classes: classes met objecten voor wijk, huizen, batterijen en kabels
 - Visualisation: script voor weergave van de oplossing
 
-In de map Data zitten alle input waardes en in de map resultaten worden alle resultaten opgeslagen door de code.
+In de map 'data' zitten alle input waardes, in de map 'results' worden alle resultaten opgeslagen en in de map 'plots' worden de resultaten gevisualiseerd. 
 
 ## Algoritmen
 
