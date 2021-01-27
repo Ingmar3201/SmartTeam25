@@ -2,28 +2,26 @@ from classDensity import Density
 
 class Share(Density):
     '''
-    Algorithm to enable cablesharing between houses
+    Enables cablesharing between houses
     '''
     
     def runShare(self):
         '''
-        control flow of share algorithm
+        Control flow of share algorithm
         '''
-        # set initial parameters
+        # get initial solution (density method from classdensity)
         self.runDensity()
-        self.initialCables = self.clone()
         lowestCost = self.totalCost()
-        bestSolution = self.clone()
-        bestVerticalSteps = 0
         self.verticalSteps = 0
+        bestVerticalSteps = 0
+        
+        # make a copy of the initial solution
+        self.initialCables = self.clone()
+        bestSolution = self.clone()
 
-        # the max amount of times a worse cost is accepted
+        # set limiting parameters: the max amount of times a worse cost is accepted
         maxDeteriorations = 5
         deteriorations = 0
-
-        #self.makePlot(f"_initial")
-        #print(f"initial cost: {self.totalCost()}")
-        #print(f"max Deteriorations: {maxDeteriorations}")
 
         # every iteration scan one step further for houses
         while deteriorations < maxDeteriorations:
@@ -31,64 +29,61 @@ class Share(Density):
             
             # use initial solution copy to save time 
             self.replaceData(self.initialCables)
-            #self.makePlot(f"vSteps{self.verticalSteps}_initial")
-            #time.sleep(1)
 
+            # get coordinates of the house objects 
             self.getHouseLocation()
-            #print("______________________")
-            #print(f"vertical Steps: {self.verticalSteps}")
-            #print("______________________")
-
-
+        
             # keep relaying cables for as long as it yields a diffrent result 
             rep = 0
             prevCost = -1
             while prevCost != self.totalCost():
                 prevCost = self.totalCost()
                 self.relayCables()
-                #print(f"rep: {rep}, new cost: {self.totalCost()}")
-                #self.makePlot(f"vSteps{self.verticalSteps}")
                 rep += 1
-                #time.sleep(0.2)
             
+            # when a better configuration if found save it and reset the limiting parameters
             if self.totalCost() < lowestCost:
                 deteriorations = 0
                 lowestCost = self.totalCost()
                 bestVerticalSteps = self.verticalSteps
                 bestSolution = self.clone()
+
             else:
                 deteriorations += 1
             
-        
+        # reset configuration to best configuration
         self.replaceData(bestSolution)
-        #self.makePlot("BestSolution")
-
-        #print("______________________________")
-        #print(f"lowest Cost: {lowestCost}")
-        #print(f"best Vertical Steps: {bestVerticalSteps}")
-        #print("______________________________")
-
+ 
         return True
 
 
     def relayCables(self):
         '''
+        merge cables by making connections between parallel cables 
+
         '''
+        # per battery sort houses from furthest to closest to battery
         for battery in self.batteries:
             houses = self.housesPerBattery(battery)
             blacklistHouses = []
             houses = self.sortHouseDistance(houses)
+
+            # per house scan for nearby cables belonging to the same battery
             for house in houses:
                 waypointHouse = False
                 cable = self.cables[house]
                 previousY = cable.y[0]
 
+                # from house walk in x direction along cable towards battery 
                 for i in range(len(cable.x)):
                     x = cable.x[i]
                     y = cable.y[i]
+
+                    # stop when cable direction changes from x to y 
                     if previousY != y:
                         break
                     
+                    # on each point of the cable scan for paralles cabels belonging to the same battery
                     searchLocations = []
                     for j in range(1,self.verticalSteps + 1):
                         searchLocations.append(f"{x},{y+j}")
