@@ -66,6 +66,7 @@ class SecondAlgorithm:
             grid.output(f"theBest_{now}", "costs-shared")
 
         print("________________________________________")
-        print("Amount of non-feasible solutions:", nonFeasible)
-        print("________________________________________")
         print("DONE!")
+        print("Amount of non-feasible solutions:", nonFeasible)
+        print(f"Plots in /plots with date and time: {now}")
+        print(f"Output json in /results with date and time: {now}")

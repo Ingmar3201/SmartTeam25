@@ -130,7 +130,6 @@ class Share(Density):
         '''
         Create new cable segment running from the cable relay point to the new house
         '''
-
         newX = []
         newY = []
 
@@ -142,7 +141,7 @@ class Share(Density):
         # calculate distance to new house in y direction 
         difference = self.cables[originHouse].y[sidetrackPoint] - self.cables[waypointHouse].y[0]
 
-        # save cable segment going in positive y direction 
+        # save cable segment going in negative y direction 
         if difference > 1:
             for k in range(1,difference):
                 newX.append(newX[-1])
@@ -176,9 +175,11 @@ class Share(Density):
 
         for i in range(len(houses)):
             maxHouse = houses[0]
+
             for j in range(len(unsorted)):
                 if self.cables[houses[j]].calcLength() >  self.cables[maxHouse].calcLength():
                     maxHouse = houses[j]
+    
             sorted.append(maxHouse)
             unsorted.remove(maxHouse)
 

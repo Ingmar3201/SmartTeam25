@@ -1,5 +1,0 @@
-DISTRICT: 1
-initial cost: 38572
-vertical Steps: 5
-rep: 0, new cost: 36592
-_________________________________________

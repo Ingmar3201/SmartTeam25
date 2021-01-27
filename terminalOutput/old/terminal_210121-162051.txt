@@ -1,4 +1,0 @@
-DISTRICT: 1
-_________________________________________
-initial cost: 38572
-max Deteriorations: 3

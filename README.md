@@ -72,7 +72,9 @@ Om de bovenstaande algoritmes aan te roepen, gebruik de instructie:
 python3 main.py
 ```
 
-Zowel algoritme 1 als algoritme 2 wordt uitgevoerd op district 1 tot en met 3. Dit geeft 6 keer een resultaat, te zien in de map result en in de map plots.
+Zowel algoritme 1 als algoritme 2 wordt uitgevoerd op district 1 tot en met 3. Dit geeft 6 keer een resultaat, namelijk voor beide algoritme en dan per district de beste.
+Deze zijn te zien in de map result en in de map plots.
+Het is ook mogelijk om maar 1 of 2 districten te runnen of het aantal keer dat een oplossing wordt gegenereert per district aan te passen. Voor algorithme 1 is het ook mogelijk om de runtime per oplossing aan te passen. De drie variabelen staan bovenaan in main.py.
 
 ## Auteurs
 

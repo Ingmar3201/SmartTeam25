@@ -9,16 +9,19 @@ sys.path.append(os.path.join(directory, "code", "visualisation"))
 from classSecondAlgorithm import SecondAlgorithm
 from classFirstAlgorithm import FirstAlgorithm
 
-districtsToRun = [1]
-amountOfSolutionsToGenerate = 1
-secondsToRunPerSolution = 1
+# algorithm parameters
+districtsToRun = [1, 2, 3]
+amountOfSolutionsToGenerate = 10
+secondsToRunPerSolution = 5
 
 print("_________________________________")
 print("|        First Algorithm        |")
 print("|_______________________________|")
+
 first = FirstAlgorithm(districtsToRun, amountOfSolutionsToGenerate, secondsToRunPerSolution)
 
 print("_________________________________")
 print("|        Second Algorithm       |")
 print("|_______________________________|")
+
 second = SecondAlgorithm(districtsToRun, amountOfSolutionsToGenerate)

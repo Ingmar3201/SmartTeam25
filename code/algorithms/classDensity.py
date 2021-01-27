@@ -149,7 +149,7 @@ class Density(InitialSolution):
    
     def getTotalLength(self, targetHouse, houses):
         '''
-        Calculates total length from house to all other houses from battery
+        Calculates total length from house to all other houses from a battery
         '''
 
         totalLength = 0
