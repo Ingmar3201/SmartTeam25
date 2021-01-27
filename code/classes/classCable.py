@@ -1,7 +1,8 @@
 class Cable():
-    """
+    '''
     Defines the structure of a cable that spans between a battery and a house
-    """
+    '''
+    
     def __init__(self, house, battery):
         self.house = house
         self.battery = battery
@@ -36,18 +37,18 @@ class Cable():
 
 
     def calcLength(self):
-        """
+        '''
         Gives the Manhattan distance between this cables battery and house
-        """
+        '''
         length = abs(self.house.x - self.battery.x) + abs(self.house.y - self.battery.y)
 
         return length
 
     
     def makeLocation(self):
-        """
+        '''
         Creates a new list with the x and y coordinates pairs as one string
-        """
+        '''
         self.locations = []
         location = ""
 

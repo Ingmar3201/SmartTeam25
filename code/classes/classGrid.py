@@ -8,9 +8,10 @@ from classCable import Cable
 from vis import plot
 
 class Grid():
-    """
+    '''
     This is the parrent class of all algorithms and defines the base structure of the grid
-    """
+    '''
+    
     def __init__(self, district):
         self.district = district
         self.batteries = []
@@ -20,9 +21,9 @@ class Grid():
 
 
     def loadData(self):
-        """
+        '''
         Calls both methods for easier access
-        """
+        '''
         self.addHouses()
         self.addBatteries()
 
@@ -30,10 +31,10 @@ class Grid():
 
 
     def addHouses(self):
-        """
+        '''
         Reads data from csv file and creates house class per line
         All objects from class house are stored in a list
-        """
+        '''
         self.houses = []
 
         # location of the csv house file
@@ -56,10 +57,10 @@ class Grid():
 
 
     def addBatteries(self):
-        """
+        '''
         Reads data from csv file and creates battery class per line
         All objects from class battery are stored in a list
-        """
+        '''
         self.batteries = []
 
         # location of the csv battery file
@@ -84,9 +85,9 @@ class Grid():
 
 
     def makeConnection(self, house, battery):
-        """
+        '''
         Make a connection between a house and battery with a cable
-        """
+        '''
 
         # restrict houses to single connection
         if house in self.cables:
@@ -105,9 +106,9 @@ class Grid():
 
 
     def removeConnection(self, house):
-        """
+        '''
         Remove the connection between house and battery by deleting the cable
-        """
+        '''
 
         # house key must exist in cables dictionairy
         if house in self.cables:
@@ -123,16 +124,16 @@ class Grid():
 
 
     def hasConnection(self, house):
-        """
+        '''
         Checks if the house has a connection
-        """
+        '''
         return house in self.cables
 
 
     def swap(self, house0, house1):
-        """
+        '''
         Swap the batteries of 2 houses
-        """
+        '''
 
         # both houses must have a cable
         if house0 in self.cables and house1 in self.cables:
@@ -158,9 +159,9 @@ class Grid():
     
 
     def makePlot(self, name, title):
-        """
+        '''
         Creates a plot of the current configuration
-        """
+        '''
         name = f"{self.district}_{name}"
         
         # plots are further handled by a function in vis.py in visualisation
@@ -168,9 +169,9 @@ class Grid():
 
 
     def housesPerBattery(self, battery):
-        """
+        '''
         Returns a list of all houses connected to a given battery
-        """
+        '''
         housesInBattery = []
         for house in self.houses:
 
@@ -187,9 +188,9 @@ class Grid():
 
 
     def cablesList(self):
-        """
+        '''
         Makes a list of all the cable objects in the cables dictionairy
-        """
+        '''
         cablesList = []
         for house in self.houses:
             cablesList.append(self.cables[house])
@@ -198,9 +199,9 @@ class Grid():
 
 
     def totalCost(self):
-        """
+        '''
         Calculates the total cost the the battery - cable configuration of this grid
-        """
+        '''
         segmentCost = 9
         batteryCost = 5000
 
@@ -221,9 +222,9 @@ class Grid():
     
 
     def output(self, name, costType):
-        """
+        '''
         Generates an output json file of the current grid configuration
-        """
+        '''
 
         # header
         output = [{"district":self.district, costType:self.totalCost()}]
@@ -254,9 +255,9 @@ class Grid():
     
 
     def clone(self):
-        """
+        '''
         Make a clone of the current cable configuration with a deepcopy
-        """
+        '''
         
         # make a list of cable dictionairy
         cablesList = self.cablesList()
@@ -266,9 +267,9 @@ class Grid():
     
 
     def replaceData(self, cablesList):
-        """
+        '''
         Overwrite the the current configuration with a cloned cables list
-        """
+        '''
         self.houses.clear()
         self.batteries.clear()
         self.cables.clear()
@@ -292,9 +293,9 @@ class Grid():
     
 
     def cableSegmentList(self):
-        """
+        '''
         Makes a list of all points from each cable, repeat points are accepted
-        """
+        '''
         locationsList = []
 
         for house in self.houses:
