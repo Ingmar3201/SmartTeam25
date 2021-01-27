@@ -58,10 +58,10 @@ Ook kan het zijn dat er met vier stapjes in de y-richting een goedkopere oplossi
 
 ## Vereisten 
 
-Deze codebase is volledig geschreven in [Python3](https://www.python.org/downloads/). In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip3 dmv. de volgende instructie:
+Deze codebase is volledig geschreven in [Python3.8.3](https://www.python.org/downloads/). In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Aanroepen
@@ -69,7 +69,7 @@ pip install -r requirements.txt
 Om de bovenstaande algoritmes aan te roepen, gebruik de instructie:
 
 ```
-python main.py
+python3 main.py
 ```
 
 Selecteer in bovenstaand bestand de gewenste algoritmes.
