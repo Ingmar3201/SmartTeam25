@@ -72,7 +72,7 @@ Om de bovenstaande algoritmes aan te roepen, gebruik de instructie:
 python3 main.py
 ```
 
-Selecteer in bovenstaand bestand de gewenste algoritmes.
+Zowel algoritme 1 als algoritme 2 wordt uitgevoerd op district 1 tot en met 3. Dit geeft 6 keer een resultaat, te zien in de map result en in de map plots.
 
 ## Auteurs
 
