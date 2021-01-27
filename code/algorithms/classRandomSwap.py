@@ -1,21 +1,12 @@
-import os, sys
 import random
 import time
-import matplotlib.pyplot as plt
-import copy
 
 from classInitialSolution import InitialSolution
-
-directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "code"))
-sys.path.append(os.path.join(directory, "code", "classes"))
-sys.path.append(os.path.join(directory, "code", "algorithms"))
-sys.path.append(os.path.join(directory, "code", "visualisation"))
 
 
 class RandomSwap(InitialSolution):
     '''
-    Optimizes initial solution. Keeps swapping two randomly selected houses for certain time. Saves cheapest solution. 
+    Optimizes initial solution. Keeps swapping two randomly selected houses for certain time. Saves best solution. 
 
     '''
 
@@ -23,36 +14,32 @@ class RandomSwap(InitialSolution):
         '''
         Controls flow of random swap algorithm
         '''
-        # get a initial solution (from classgrid)
+        # get a initial solution (from class initialsolution)
         self.runInitialSolution()
         
-        # set limiting parameters
+        # set limiting parameter
         self.bestPrice = self.totalCost()
         self.limitPrice = self.bestPrice * 1.001
 
+        # saves the intial cable configuration and defaults best cables (method of class grid)
         self.initialCables = self.clone()
         self.cablesBest = self.initialCables
 
+        # make list of all cable points
         cableSegmentList = self.cableSegmentList()
         cableSegmentSet = set(cableSegmentList)
+
+        # calculate all points that repeat in the intial solution
         self.initialRepeatCableCount = len(cableSegmentList) - len(cableSegmentSet)
 
-        # set runtime
         endTime = time.time() + runtime
-        prevMinute = 0.0
-        reps = 0
 
         # make swaps during selected runtime
         while time.time() < endTime:
-            
-            # print time
-            currentMinute = round((endTime - time.time())/60,1)
-            if currentMinute != prevMinute:
-                prevMinute = currentMinute
 
             # make one swap 
             self.randomSwap()
-            reps += 1
+
 
         # reset cable configuration to best configuration
         self.replaceData(self.cablesBest)
@@ -70,7 +57,7 @@ class RandomSwap(InitialSolution):
         house0 = self.houses[0]
         house1 = self.houses[1]
         
-        # if swap is possible within capacity of batteries make the swap
+        # if swap is possible within capacity of batteries make the swap (method in class grid)
         if self.swap(house0, house1):
         
             # get paramaters of new configuration

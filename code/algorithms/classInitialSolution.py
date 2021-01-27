@@ -30,9 +30,9 @@ class InitialSolution(Grid):
         
     
     def startConnect(self):
-    '''
-    Connects all houses from largest to smallest output to closest battery and saves remaining houses 
-    '''
+        '''
+        Connects all houses from largest to smallest output to closest battery and saves remaining houses 
+        '''
         self.freeHouses = []
 
         for house in self.houses:
