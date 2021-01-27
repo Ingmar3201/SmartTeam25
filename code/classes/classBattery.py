@@ -5,9 +5,6 @@ class Battery():
     def __init__(self, position, capacity, id):
         self._position = position
         self.capacity = float(capacity)
-        #self._housesDict = {}
-        #self.housesList = []
-        #self._totalOutput = 0
         self.totalOutput = 0.0
         self.id = id
 
@@ -22,54 +19,31 @@ class Battery():
         temp = ""
 
         for letter in self._position:
+
             # everything before the comma belongs to the x-coordinate
             if letter == ",":
                 self.x = int(temp)
                 temp = ""
             else:
                 temp += letter
+                
         # the remaining characters belong to the y-coordinate
         self.y = int(temp)
 
-        # an eqaution to make it possible to validate the coordinates
+        # validate the coordinates
         return self.x >= 0 and self.y >= 0
 
 
     def remainingCapacity(self):
+        """
+        Return the capacity that can still be filled by output
+        """
         return self.capacity - self.totalOutput
 
 
     def calcLength(self, house):
+        """
+        Calculates the length between this battery and a house with Manhattan distance
+        """
         length = abs(house.x - self.x) + abs(house.y - self.y)
         return length
-
-    #def checkHouse(self, house):
-    #    return self.totalOutput + house.output <= self.capacity
-
-    """
-    def addHouse(self, house):
-
-        #Links a house to the battery and adds the house output to the total output
-
-        if house.connected:
-            return False
-            
-        self._totalOutput += house.output
-        self._housesDict[house] = abs(house.x - self.x) + abs(house.y - self.y)
-        self.housesList.append(house)
-        house.addBattery(self)
-        cable = Cable(house, self)
-        house.addCable(cable)
-        return cable
-
-    def removeHouse(self, house):
-        if house in self._housesDict:
-            self._totalOutput -= house.output
-            cable = house.cable
-            del self._housesDict[house]
-            self.housesList.remove(house)
-            house.removeBattery()
-            return cable
-        
-        return False
-    """
