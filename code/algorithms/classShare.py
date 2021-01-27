@@ -1,39 +1,9 @@
-'''
-Algorithm to enable cablesharing between houses
-'''
-
-'''
-PLEUDO CODE
-per batterij alle kabels af gaan
-    voor een kabel: # zoek vanaf huis tot batterij 
-        punt voor punt, naar bijliggende kabels in de y richting
-            wordt er iets gevonden
-                check of: 
-                    het een huis is, 
-                    of het bij dezelfde batterij hoort
-                    en of de huis niet al is gebruikt
-                neem alle kabel punten over
-                stop als de kabel in de y richting gaat
-'''
-
-
-import os, sys
-import matplotlib.pyplot as plt
-import random
-import time
-
-directory = os.path.dirname(os.path.realpath(__file__))
-#sys.path.append(os.path.join(directory, "code"))
-sys.path.append(os.path.join(directory, "code", "classes"))
-#sys.path.append(os.path.join(directory, "code", "algorithms"))
-#sys.path.append(os.path.join(directory, "code", "visualisation"))
-
-
 from classDensity import Density
 
-
-
 class Share(Density):
+    '''
+    Algorithm to enable cablesharing between houses
+    '''
     
     def runShare(self):
         '''

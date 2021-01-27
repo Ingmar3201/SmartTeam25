@@ -1,6 +1,3 @@
-#from classBattery import Battery
-#from classHouse import House
-
 class Cable():
     def __init__(self, house, battery):
         self.house = house

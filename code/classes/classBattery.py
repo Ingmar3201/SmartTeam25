@@ -1,5 +1,3 @@
-from classCable import Cable
-
 class Battery():
     """
     Defines the components of a battery object

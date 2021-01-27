@@ -1,6 +1,5 @@
 import csv
 import json
-import datetime
 import copy
 
 from classBattery import Battery
@@ -175,11 +174,11 @@ class Grid():
         return total
     
 
-    def output(self, name):
+    def output(self, name, costType):
         """
 
         """
-        output = [{"district":self.district, "costs-shared":self.totalCost()}]
+        output = [{"district":self.district, costType:self.totalCost()}]
         for battery in self.batteries:
             housesInfo = []
             houses = self.housesPerBattery(battery)

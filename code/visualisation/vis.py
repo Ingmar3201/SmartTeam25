@@ -1,27 +1,10 @@
-'''
-Gets data from objects and plots houses, batteries and cables
-'''
-
 import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
-import os, sys
+from matplotlib.ticker import (AutoMinorLocator)
 
-directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "code"))
-sys.path.append(os.path.join(directory, "code", "classes"))
-sys.path.append(os.path.join(directory, "code", "algorithms"))
-
-
-#from readBattery import readBattery
-#from readHouse import readHouse
-#from classCable import Cable 
-#from objective import objective
-
-
-def plot(grid, name):
+def plot(grid, filename, title):
     '''
     Plots all houses batteries and cables and takes path to housedata batterydata and a list with cable objects
+    Gets data from objects and plots houses, batteries and cables
     '''
     # get district data
     houses = grid.houses
@@ -53,7 +36,7 @@ def plot(grid, name):
 
     # plots single grid with seperate x and y cordslist for houses and batteries
     fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
-    fig.suptitle(district)
+    fig.suptitle(f"{district}: {title}")
 
     # plot house 
     #ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = house_size)
@@ -87,8 +70,6 @@ def plot(grid, name):
         ax.plot(x, y, 's', color = "black", label = 'batteries', markersize = battery_size)
 
 
-
-
     # plot grid
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))
@@ -101,7 +82,7 @@ def plot(grid, name):
     plt.grid(b=True, which='minor', color='black', linestyle='-', alpha = 0.2)
     plt.title(totalCosts)
     plt.suptitle(district)
-    plt.savefig(f"plots/district{name}.png")
+    plt.savefig(f"plots/district{filename}.png")
     # plt.show()
    
     

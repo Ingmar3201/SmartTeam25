@@ -38,7 +38,7 @@ class RandomSwap(InitialSolution):
         '''
         # set initial parameters
         self.runInitialSolution()
-        print(f"initial cost: {self.totalCost()}")
+        #print(f"initial cost: {self.totalCost()}")
         self.bestPrice = self.totalCost()
         self.limitPrice = self.bestPrice * 1.001
         self.initialCables = self.clone()
@@ -60,17 +60,17 @@ class RandomSwap(InitialSolution):
             currentMinute = round((endTime - time.time())/60,1)
             if currentMinute != prevMinute:
                 prevMinute = currentMinute
-                print(f"remaining minutes: {prevMinute}, repeats: {reps}")
+                #print(f"remaining minutes: {prevMinute}, repeats: {reps}")
 
             # make swap 
             self.randomSwap()
             reps += 1
 
-        print(f"DONE! repeats: {reps}")
+        #print(f"DONE! repeats: {reps}")
         #print(f"last price: {self.totalCost()}")
 
         self.replaceData(self.cablesBest)
-        print(f"best price: {self.totalCost()}")
+        #print(f"best price: {self.totalCost()}")
         return True
 
 
@@ -97,10 +97,10 @@ class RandomSwap(InitialSolution):
             if currentPrice < self.bestPrice:
                 self.bestPrice = currentPrice
                 self.cablesBest = self.clone()
-                print(f"better price: {self.totalCost()}")
-                self.output("bestOut")
+                #print(f"better price: {self.totalCost()}")
+                #self.output("bestOut")
 
-            print(currentRepeatCableCount)
+            #print(currentRepeatCableCount)
 
             # if swap exceeds limiting parameters reset to initial configuration
             if currentPrice > self.limitPrice or currentRepeatCableCount < self.initialRepeatCableCount:

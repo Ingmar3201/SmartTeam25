@@ -1,6 +1,3 @@
-#from itertools import permutations
-import time
-
 from classInitialSolution import InitialSolution
 
 class Density(InitialSolution):
