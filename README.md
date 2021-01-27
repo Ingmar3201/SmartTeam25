@@ -64,7 +64,7 @@ pip install -r requirements.txt
 
 ## Test 
 
-Om de code te draaien met de standaardconfiguratie (bv. brute-force en voorbeeld.csv) gebruik de instructie:
+Om de bovenstaande algoritmes aan te roepen, gebruik de instructie:
 
 ```
 python main.py
