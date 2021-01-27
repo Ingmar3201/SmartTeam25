@@ -16,7 +16,7 @@ Kosten:
 
 Specificaties:
 - Elk huis heeft een vaste energie output
-- Elke batterij heeft een vaste maximale capaciteit 
+- Elke batterij heeft een vaste capaciteit
 - Huizen en batterijen mogen niet verplaatst worden
 - Kabelsegmenten mogen gedeeld worden
 
@@ -29,11 +29,13 @@ Alle Python scripts staan in de map 'code'. Deze is verder opgedeeld in
 
 In de map 'data' zitten alle input waardes, in de map 'results' worden alle resultaten opgeslagen en in de map 'plots' worden de resultaten gevisualiseerd. 
 
-## Algoritmen
+## Algoritmes
+
+Hieronder per algoritme een korte uitleg.
 
 ### Beginoplossing
 
-De beginoplossing - Initial Solution - is een door ons gegenereerde startoplossing waarop vervolgens onze optimalisatiealgoritmen kunnen worden losgelaten. De beginoplossing soorteert de huizen op basis van energie output: van groot naar klein. Van groot naar klein wordt er vervolgens gekeken welke batterij voor dat huis het dichtst bij is. Indien mogelijk binnen de capaciteit van de betreffende batterij, wordt het huis verbonden. Zo niet, wordt er gekeken naar de op een na dichtstbijzijnde batterij (en zo verder). Mocht het aan het eind van dit proces niet 'uitkomen'. Worden, in dit geval van klein naar groot, huizen weer losgekoppeld en opnieuw herverdeeld. Dit gaat door tot alle huizen verbonden zijn.
+De beginoplossing - Initial Solution - is een door ons gegenereerde startoplossing waarop vervolgens onze optimalisatiealgoritmen kunnen worden losgelaten. De beginoplossing soorteert de huizen op basis van energie output: van groot naar klein. In die volgorde wordt er vervolgens gekeken welke batterij voor dat huis het dichtstbij is. Indien mogelijk binnen de capaciteit van de betreffende batterij, wordt het huis verbonden. Zo niet, wordt er gekeken naar de op een na dichtstbijzijnde batterij (en zo verder). Mocht het aan het eind van dit proces niet uitkomen worden, in dit geval van klein naar groot, huizen weer losgekoppeld en opnieuw herverdeeld. Dit gaat door tot alle huizen verbonden zijn.
 
 ### Eerste Algoritme: Random Swap
 
@@ -48,7 +50,7 @@ De volgende stap is om te kijken naar de losgekoppelde huizen en deze op nieuw i
 
 De huizen liggen nu gegroepeerd en veel kabels liggen parralel aan elkaar. Dat komt doordat een kabel van punt A naar punt B zo wordt gelegd, dat eerst de gehele afstand in de x-richting wordt afgelegd en vervolgens de gehele afstand in de y-richting wordt afgelegd. Als een groep huizen links of rechts (x-richting) van de batterij ligt, zullen veel kabels parralel in de x-richting naar de batterij toe lopen en ter hoogte van de batterij over de y-as naar boven of beneden lopen. Het doel van dit algoritme is zo veel mogelijk kabels in de x-richting te laten overlappen, waardoor kosten worden gereduceerd. 
 
-Het algoritme loopt per huis over de kabel richting de batterij. Dit begint vrijwel altijd in de x-richting omdat de kabel daar eerst is aangelegd. Voor elk stapje op de kabel wordt er in de y-richting, een stapje omhoog en een stapje omlaag, gekeken of er een huis van dezelfde batterij staat. Als dit zo is wordt er een kabel naar dat huis gelegd en de kabel die eerst naar de batterij lag verwijderd. Dit wordt herhaald voor alle huizen. Vervolgens wordt dit meermaals herhaald, maar met een toenemend aantal stapjes op de y-as. Bij een volgende keer wordt er dus twee stapjes boven en twee stapjes onder de kabel gekeken naar een 'buurhuis' om een kabel aan te verbinden. Dan drie, vier, en zo voorts.
+Het algoritme loopt per huis over de kabel richting de batterij. Dit begint vrijwel altijd in de x-richting omdat de kabel daar eerst is aangelegd. Voor elk stapje op de kabel wordt er in de y-richting, een stapje omhoog en een stapje omlaag, gekeken of er een huis van dezelfde batterij staat. Als dit zo is wordt er een kabel naar dat huis gelegd en de kabel die eerst naar de batterij lag verwijderd. Dit wordt meermaals herhaald voor alle huizen, totdat de prijs niet meer afneemt. Vervolgens wordt dit een aantal keer herhaald, maar met een toenemend aantal stapjes op de y-as. Bij een volgende keer wordt er dus twee stapjes boven en twee stapjes onder de kabel gekeken naar een 'buurhuis' om een kabel aan te verbinden. Dan drie, vier, en zo voorts.
 
 Een kabel naar een huis dat dichterbij ligt dan de batterij is altijd goedkoper dan een kabel naar de batterij, dus per definitie wordt de configuratie na een wissel goedkoper. Als er meerdere keren geen goedkopere configuratie gevonden is, stopt het algoritme. 
 
@@ -56,19 +58,21 @@ Ook kan het zijn dat er met vier stapjes in de y-richting een goedkopere oplossi
 
 ## Vereisten 
 
-Deze codebase is volledig geschreven in [Python3.8.3](https://www.python.org/downloads/). In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
+Deze codebase is volledig geschreven in [Python3](https://www.python.org/downloads/). In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip3 dmv. de volgende instructie:
 
 ```
 pip install -r requirements.txt
 ```
 
-## Test 
+## Aanroepen
 
 Om de bovenstaande algoritmes aan te roepen, gebruik de instructie:
 
 ```
 python main.py
 ```
+
+Selecteer in bovenstaand bestand de gewenste algoritmes.
 
 ## Auteurs
 
