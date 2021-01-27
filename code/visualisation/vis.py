@@ -11,13 +11,8 @@ def plot(grid, filename, title):
     batteries = grid.batteries
     cables = grid.cablesList()
     cablesDict = grid.cables
-    district = f"District: {grid.district}"
+    district = f"District: {grid.district}, {title}"
     totalCosts = f"Total cost: {grid.totalCost()}"
-
-    house_x = []
-    house_y = []
-    bat_x = []
-    bat_y = []
 
     # gets data from house objects and battery objects
     #for house in houses:
@@ -29,14 +24,15 @@ def plot(grid, filename, title):
     #    bat_y.append(int(battery.y))
     
     # set plot attributes
-    battery_size = 9
+    battery_size = 8
     house_size = 8
     fig_size = 8
-    cable_width = 2
+    lineWidth = 1.8
+    outlineWidth = 0.5
 
     # plots single grid with seperate x and y cordslist for houses and batteries
     fig, ax = plt.subplots(1, figsize=(fig_size, fig_size))
-    fig.suptitle(f"{district}: {title}")
+    fig.suptitle(f"{district}:")
 
     # plot house 
     #ax.plot(house_x, house_y, 'p', color = 'blue', label = 'houses', markersize = house_size)
@@ -53,21 +49,26 @@ def plot(grid, filename, title):
         y = cable.y
         id = cable.battery.id
 
-        ax.plot(x, y, '-', color = colors[id], label = 'cable', linewidth = cable_width)
+        ax.plot(x, y, '-', color = colors[id], label = 'cable', 
+        linewidth = lineWidth, alpha = 0.6)
 
     for house in houses:
         x = house.x
         y = house.y
         id = cablesDict[house].battery.id
 
-        ax.plot(x, y, 'p', color = colors[id], label = 'houses', markersize = house_size)
+        ax.plot(x, y, 'p', color = colors[id], label = 'houses', 
+        markersize = house_size, markeredgecolor = "black",
+        markeredgewidth = outlineWidth)
 
     for battery in batteries:
         x = battery.x
         y = battery.y
         id = battery.id
 
-        ax.plot(x, y, 's', color = "black", label = 'batteries', markersize = battery_size)
+        ax.plot(x, y, 's', color = "black", label = 'batteries', 
+        markersize = battery_size, markeredgecolor = colors[id],
+        markeredgewidth = lineWidth)
 
 
     # plot grid

@@ -122,9 +122,9 @@ class Grid():
         return False
     
 
-    def makePlot(self, name):
+    def makePlot(self, name, title):
         name = f"{self.district}_{name}"
-        plot(self, name)
+        plot(self, name, title)
 
 
     def housesPerBattery(self, battery):
